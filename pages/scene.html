@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scenepick | scene</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="../assets/favicon.png" sizes="32x32"/>
+    <link rel="stylesheet" href="../libraries/huebee/huebee.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="../libraries/huebee/hubee.js"></script>
+</head>
+<body>
+<!-- Nav Bar -->
+    <nav>
+        <div class="wrapper">
+            <a href="scenes.html">
+                <img class="navLogo" src="../assets/logo.svg" alt="logo">
+            </a>
+            <img class="navMenuButton" src="../assets/menu.svg" alt="menu">
+            <ul class="navList">
+                <img class="navCloseButton" src="../assets/close.svg" alt="close">
+                <li><a href="scenes.html">scenes</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="contact.html">contact</a></li>
+            </ul>
+            <div id="navUnderlay" class="underlay"></div>
+        </div>
+    </nav>
+<!-- Nav Bar -->
+    <section>
+        <div class="wrapper">
+            <div class="containers">
+                <div class="canvasContainer">
+                    <canvas id="renderCanvas" touch-action="none"></canvas>
+                </div>
+                <div class="controlsContainer">
+                    <div id="environmentControls" class="controlsPanel">
+                        <div class="control">
+                            <h5>Background color</h5>
+                            <div class="colors">
+                                <input id="environmentColorPicker" class="color-input textBox"/>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <h5>Field of view</h5>
+                            <input id="fovSlider" type="range" class="slider" min="0.1" max="1.5" step="0.01">
+                        </div>
+                        <div class="control">
+                            <h5>Light position</h5>
+                            <input id="lightXSlider" type="range" class="slider" min="0" max="2" step="0.01">
+                            <input id="lightYSlider" type="range" class="slider" min="0" max="2" step="0.01">
+                        </div>
+                        <div class="control">
+                            <h5>Shadow darkness</h5>
+                            <input id="shadowDarknessSlider" type="range" class="slider" min="0" max="1" step="0.01">
+                        </div>
+                    </div>
+                    <div id="objectControls" class="controlsPanel">
+                        <div class="control">
+                            <h5>Color</h5>
+                            <div class="colors">
+                                <input id="objectColorPicker" class="color-input textBox"/>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <h5>Self-illumination</h5>
+                            <input id="objectEmissiveSlider" type="range" class="slider" min="0" max="1" step="0.01">
+                        </div>
+                        <div class="control">
+                            <h5>Transparency</h5>
+                            <input id="objectAlphaSlider" type="range" class="slider" min="0" max="1" step="0.01">
+                        </div>
+                    </div>
+                    <div class="sceneButtons">
+                        <button id="exportButton" class="fill">capture image</button>
+                        <button id="resetButton" class="line">reset scene</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Export Modal -->
+        <div id="exportModal" class="modal">
+            <div class="modalTop">
+                <h5 class="modalTitle">Capture Image</h5>
+                <img id="exportCloseButton" class="modalClose" src="../assets/close.svg" alt="close">
+            </div>
+            <div class="modalContent">
+                <div class="toggle">
+                    <input type="checkbox" id="transparentBackground" class="toggleButton">
+                    <label for="transparentBackground">Transparent Background</label>
+                </div>
+                <h5>Select Image Size</h5><br>
+                <div>
+                    <input type="radio" id="sizeOne" class="radioButton" name="imageSize" value="sizeOne" checked>
+                    <label for="sizeOne">Small (1080 ✕ 1080 px)</label>
+                </div>
+                <div>
+                    <input type="radio" id="sizeTwo" class="radioButton" name="imageSize" value="sizeTwo">
+                    <label for="sizeTwo">Medium (2160 ✕ 2160 px)</label>
+                </div>
+                <div>
+                    <input type="radio" id="sizeTree" class="radioButton" name="imageSize" value="sizeTree">
+                    <label for="sizeTree">Large (3240 ✕ 3240 px)</label>
+                </div>
+                <button id="downloadButton" class="fill">Download</button>
+            </div>
+        </div>
+        <div id="exportUnderlay" class="underlay"></div>
+    </section>
+<!-- Footer -->
+<footer>
+    <div class="wrapper">
+        <p>Copyright © 2022 <span>scenepick.com</span></p>
+    </div>
+</footer>
+<!-- Scripts -->
+<script src="../scripts/navigation.js"></script>
+<script src="../scripts/scene.js"></script>
+<script src="../scripts/export_modal.js"></script>
+</body>
+</html>

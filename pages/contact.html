@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scenepick | contact</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="../assets/favicon.png" sizes="32x32"/>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Nav Bar -->
+    <nav>
+        <div class="wrapper">
+            <a href="scenes.html">
+                <img class="navLogo" src="../assets/logo.svg" alt="logo">
+            </a>
+            <img class="navMenuButton" src="../assets/menu.svg" alt="menu">
+            <ul class="navList">
+                <img class="navCloseButton" src="../assets/close.svg" alt="close">
+                <li><a href="scenes.html">scenes</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="contact.html" class="active">contact</a></li>
+            </ul>
+            <div id="navUnderlay" class="underlay"></div>
+        </div>
+    </nav>
+<!-- Contact Title -->
+    <section>
+        <div class="wrapper">
+            <h1 class="contactTitle">What’s on your mind?</h1>
+        </div>
+    </section>
+<!-- Contact Form -->
+    <section>
+        <div class="wrapper"> 
+            <form class="gform contactForm" method="POST" data-email="example@email.net"
+            action="https://script.google.com/macros/s/AKfycbwvqaFvROELhomQ5V6-GjW0hXAvGxVd-yw51mbn/exec">
+                <!-- change the form action to your script url -->
+                <div class="form-elements">
+                    <fieldset class="nameInput">
+                        <h5 class="inputlabel">Name *</h5>
+                        <input class="textBox" type="text" id="name" name="name" placeholder="Your Name ..." required />
+                    </fieldset >
+                    <fieldset  class="emailInput">
+                        <h5 class="inputlabel">Email Address *</h5>
+                        <input class="textBox" type="email" id="email" name="email" value="" placeholder="Your Email Address ..." required />
+                    </fieldset >
+                    <fieldset   class="messageInput">
+                        <h5 class="inputlabel">Message *</h5>
+                        <textarea class="textBox textArea" id="message" name="message" placeholder="Your Message ..." required></textarea>
+                    </fieldset >
+                    <div class="toggle">
+                        <input type="checkbox" id="consent" class="toggleButton">
+                        <label for="consent">I consent to having this website store my personal data so they can respond to my message.</label>
+                    </div>
+                    <button id="sendButton" class="fill sendButton" disabled>send message</button>
+                </div>
+                <div class="thankyou_message" style="display:none;">
+                    <h2>Thank you for contacting us, we will get back to you as soon as possible.</h2>
+                </div>
+            </form>
+            <!-- Submit the Form to Google Using "AJAX" -->
+            <script data-cfasync="false" type="text/javascript"
+            src="../libraries/async_html_mail/form-submission-handler.js"></script>
+            <!-- END -->
+        </div>
+    </section>
+<!-- Footer -->
+    <footer>
+        <div class="wrapper">
+            <p>Copyright © 2022 <span>scenepick.com</span></p>
+        </div>
+    </footer>
+<!-- Scripts -->
+    <script src="../scripts/navigation.js"></script>
+    <script src="../scripts/contact.js"></script>
+    <script data-cfasync="false" type="text/javascript" src="../libraries/form-submission-handler.js"></script>
+</body>
+</html>
