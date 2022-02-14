@@ -25,11 +25,12 @@ h5{
     line-height: 20px;
     padding: 0px 0px 12px 0px;
     font-size: 16px;
+    font-weight: 600;
 }
 p{
     line-height: 30px;
     font-size: 16px;
-    font-weight: 200;
+    font-weight: 300;
 }
 a{
     text-decoration: none;
@@ -299,7 +300,7 @@ nav{
 
 footer{
     width: 100%;
-    padding: 40px 0px 40px 0px;
+    padding: 20px 0px 20px 0px;
     box-shadow: 0 -1px 0 #B1BEC5;
     text-align: center;
     clear: both;
@@ -312,6 +313,10 @@ footer p{
 }
 footer span{
     font-weight: 700;
+}
+.socialIcon{
+    height: 60px;
+    padding: 10px;
 }
 
 /* -------------------- SECTIONS */
@@ -330,11 +335,13 @@ section{
     padding: 40px 0px 120px 0px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
     list-style-type: none;
 }
 .sceneThumbnail{
     width: 100%;
     display: block;
+    border-radius: 4px;
 }
 
 /* -------------------- ABOUT SPECIFIC */
@@ -386,14 +393,6 @@ section{
     text-align: center;
     color: #78909D;
 }
-.socialMedia{
-    margin: 40px 0px 0px 0px;
-    text-align: center;
-}
-.socialIcon{
-    width: 64px;
-    padding: 8px;
-}
 
 /* -------------------- SCENE DETAIL SPECIFIC */
 
@@ -425,19 +424,22 @@ section{
     float: left;
     width: 320px;
     margin: 0px 0px 0px 80px;
-
 }
-.controlsPanel{
-    padding: 39px 39px 39px 39px;
+.controls{
     border-radius: 4px;
     border: 1px solid #78909D;
+}
+.controlsHeader{
+    padding: 39px 0px 19px 39px;
+}
+.controlsPanel{
+    padding: 20px 39px 19px 39px;
 }
 .controlsContainer button{
     width: 100%;
     margin: 20px 0px 0px 0px;
 }
 .control{
-    text-align: center;
     margin: 0px 0px 20px 0px;
 }
 #exportModal{

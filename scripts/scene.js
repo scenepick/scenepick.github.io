@@ -97,8 +97,10 @@ fetch("../scenes/" + sceneName + ".json")
                     saturations: 3,
                 });
                 environmentColorPicker.setColor(defaultBgColor)
+                environmentColorPicker.value = defaultBgColor;
                 environmentColorPicker.on('change', function(color) {
                     scene.clearColor = new BABYLON.Color3.FromHexString(color);
+                    environmentColorPicker.value = color;
                 });
 
                 // MESH SELECTION & EDITING
@@ -231,6 +233,7 @@ fetch("../scenes/" + sceneName + ".json")
                     camera.setPosition(new BABYLON.Vector3(defaultCamPos[0], defaultCamPos[1], defaultCamPos[2]));
                     camera.setTarget(new BABYLON.Vector3(defaultCamTar[0], defaultCamTar[1], defaultCamTar[2]));
                     environmentColorPicker.setColor(defaultBgColor)
+                    environmentColorPicker.value = defaultBgColor;
                     fovSlider.value = defaultFov;
                     camera.fov = defaultFov;
                     setPrecision(defaultFov);
