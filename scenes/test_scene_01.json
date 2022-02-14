@@ -1,0 +1,26 @@
+{
+    "environment":{
+        "cameraPosition": [4, 4, 4],
+        "cameraTarget": [0, 1, 0],
+        "color": "#37474F",
+        "fov": 0.8,
+        "light": [0.75, 1],
+        "shadowDarkness": 0.5
+    },
+    "objects": [{
+        "name": "Object.001",
+        "isShadowOnly": false,
+        "color": "#F50057",
+        "emissiveIntensity": 0,
+        "alpha": 1
+    },{
+        "name": "Object.002",
+        "isShadowOnly": false,
+        "color": "#FFFFFF",
+        "emissiveIntensity": 0,
+        "alpha": 1
+    },{
+        "name": "Object.003",
+        "isShadowOnly": true
+    }]
+}
