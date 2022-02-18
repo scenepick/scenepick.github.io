@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    min-width: 320px;
+    min-width: 360px;
     color: #37474F;
     font-family: 'Montserrat', sans-serif;
 }
@@ -158,16 +158,13 @@ fieldset{
 }
 .radioButton + label{
     background:url('../assets/radio_unchecked.svg') no-repeat;
-    height: 40px;
+    height: 24px;
     line-height: 24px;
     display:inline-block;
-    padding: 0px 0px 0px 34px;
+    padding: 0px 0px 0px 32px;
 }
 .radioButton:checked + label{
     background:url('../assets/radio_checked.svg') no-repeat;
-}
-.toggle{
-    margin: 0px 0px 40px 0px;
 }
 .toggleButton{
     display:none;
@@ -237,6 +234,11 @@ fieldset{
 }
 .slider::-moz-focus-outer {
     border: 0;
+}
+
+.pageTitle{
+    text-align: center;
+    padding: 40px 0px 40px 0px;
 }
 
 /* -------------------- NAV BAR */
@@ -327,10 +329,6 @@ section{
 
 /* -------------------- SCENES SPECIFIC */
 
-.valueProposition{
-    max-width: 800px;
-    padding: 40px 0px 40px 0px;
-}
 #scenesList{
     padding: 40px 0px 120px 0px;
     display: grid;
@@ -363,10 +361,6 @@ section{
 
 /* -------------------- CONTACT SPECIFIC */
 
-.contactTitle{
-    text-align: center;
-    padding: 40px 0px 40px 0px;
-}
 .contactForm{
     max-width: 800px;
     padding: 40px 0px 120px 0px;
@@ -384,6 +378,9 @@ section{
 }
 .messageInput{
     margin: 0px 0px 30px 0px;
+}
+.consentToggle{
+    margin: 0px 0px 40px 0px;
 }
 .sendButton{
     display: block;
@@ -441,6 +438,21 @@ section{
 }
 .control{
     margin: 0px 0px 20px 0px;
+}
+.controlToggle{
+    float: right;
+    margin-top: -2px;
+    margin-right: -10px;
+}
+.shadowPlaneRadio{
+    float: left;
+    margin: 10px 10px 20px 0px;
+}
+.transparentBgToggle{
+    margin: 0px 0px 40px 0px;
+}
+.imageSizeRadio{
+    margin: 0px 0px 16px 0px;
 }
 #exportModal{
     visibility: hidden;

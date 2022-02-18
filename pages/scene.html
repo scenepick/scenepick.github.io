@@ -69,6 +69,28 @@
                                 <h5>Shadow darkness</h5>
                                 <input id="shadowDarknessSlider" type="range" class="slider" min="0" max="1" step="0.01">
                             </div>
+                            <div class="control">
+                                <div class="controlToggle">
+                                    <input type="checkbox" id="shadowPlanesToggle" class="toggleButton">
+                                    <label for="shadowPlanesToggle"></label>
+                                </div>
+                                <h5>Shadow planes</h5>
+                                <div id="shadowPlanesPanel">
+                                    <div class="shadowPlaneRadio">
+                                        <input type="radio" id="planeRadioX" class="radioButton" name="shadowPlane" value="planeRadioX">
+                                        <label for="planeRadioX">x</label>
+                                    </div>
+                                    <div class="shadowPlaneRadio">
+                                        <input type="radio" id="planeRadioY" class="radioButton" name="shadowPlane" value="planeRadioY">
+                                        <label for="planeRadioY">y</label>
+                                    </div>
+                                    <div class="shadowPlaneRadio">
+                                        <input type="radio" id="planeRadioZ" class="radioButton" name="shadowPlane" value="planeRadioZ">
+                                        <label for="planeRadioZ">z</label>
+                                    </div>
+                                    <input id="shadowPlaneSlider" type="range" class="slider" min="-4" max="4" step="0.01">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="objectControls" class="controls">
@@ -104,22 +126,22 @@
                 <img id="exportCloseButton" class="modalClose" src="../assets/close.svg" alt="close">
             </div>
             <div class="modalContent">
-                <div class="toggle">
+                <div class="transparentBgToggle">
                     <input type="checkbox" id="transparentBackground" class="toggleButton">
-                    <label for="transparentBackground">Transparent Background</label>
+                    <label for="transparentBackground">Transparent background</label>
                 </div>
-                <h5>Select Image Size</h5><br>
-                <div>
-                    <input type="radio" id="sizeOne" class="radioButton" name="imageSize" value="sizeOne">
-                    <label for="sizeOne">Small (1080 ✕ 1080 px)</label>
+                <h5>Image size</h5><br>
+                <div class="imageSizeRadio">
+                    <input type="radio" id="sizeRadioOne" class="radioButton" name="imageSize" value="sizeRadioOne">
+                    <label for="sizeRadioOne">Small (1080 ✕ 1080 px)</label>
                 </div>
-                <div>
-                    <input type="radio" id="sizeTwo" class="radioButton" name="imageSize" value="sizeTwo" checked>
-                    <label for="sizeTwo">Medium (2160 ✕ 2160 px)</label>
+                <div class="imageSizeRadio">
+                    <input type="radio" id="sizeRadioTwo" class="radioButton" name="imageSize" value="sizeRadioTwo" checked>
+                    <label for="sizeRadioTwo">Medium (2160 ✕ 2160 px)</label>
                 </div>
-                <div>
-                    <input type="radio" id="sizeTree" class="radioButton" name="imageSize" value="sizeTree">
-                    <label for="sizeTree">Large (3240 ✕ 3240 px)</label>
+                <div class="imageSizeRadio">
+                    <input type="radio" id="sizeRadioTree" class="radioButton" name="imageSize" value="sizeRadioTree">
+                    <label for="sizeRadioTree">Large (3240 ✕ 3240 px)</label>
                 </div>
                 <button id="downloadButton" class="fill">Download</button>
             </div>

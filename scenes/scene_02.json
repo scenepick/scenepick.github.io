@@ -1,80 +1,71 @@
 {
     "environment":{
-        "cameraPosition": [-5, 5, -5],
-        "cameraTarget": [0, 1.5, 0],
+        "cameraPosition": [-5, 2.5, 5],
+        "cameraTarget": [0, -0.5, 0],
         "color": "#F50057",
         "fov": 0.8,
-        "light": [1.3, 1.1],
-        "shadowDarkness": 0.25
+        "lightX": 1.35,
+        "lightY": 1.6,
+        "shadowDarkness": 0.25,
+        "shadowPlanes": true,
+        "shadowPlaneX": [false, 0],
+        "shadowPlaneY": [false, 0],
+        "shadowPlaneZ": [true, -2]
     },
     "objects": [{
         "name": "Object.001",
-        "isShadowOnly": false,
         "color": "#FFFFFF",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.002",
-        "isShadowOnly": false,
         "color": "#37474F",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.003",
-        "isShadowOnly": false,
         "color": "#FFFFFF",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.004",
-        "isShadowOnly": false,
         "color": "#37474F",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.005",
-        "isShadowOnly": false,
         "color": "#FFFFFF",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.006",
-        "isShadowOnly": false,
         "color": "#37474F",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.007",
-        "isShadowOnly": false,
         "color": "#37474F",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.008",
-        "isShadowOnly": false,
         "color": "#FFFFFF",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.009",
-        "isShadowOnly": false,
         "color": "#37474F",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.010",
-        "isShadowOnly": false,
         "color": "#FFFFFF",
         "emissiveIntensity": 0,
         "alpha": 1
     },{
         "name": "Object.011",
-        "isShadowOnly": false,
         "color": "#37474F",
         "emissiveIntensity": 0,
         "alpha": 1
-    },{
-        "name": "Object.012",
-        "isShadowOnly": true
     }]
 }

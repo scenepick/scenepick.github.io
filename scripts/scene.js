@@ -27,11 +27,15 @@ fetch("../scenes/" + sceneName + ".json")
     var defaultCamTar = [jsonData.environment.cameraTarget[0],jsonData.environment.cameraTarget[1],jsonData.environment.cameraTarget[2]];
     var defaultBgColor = jsonData.environment.color;
     var defaultFov = jsonData.environment.fov;
-    var defaultLightX = jsonData.environment.light[0];
-    var defaultLightY = jsonData.environment.light[1];
+    var defaultLightX = jsonData.environment.lightX;
+    var defaultLightY = jsonData.environment.lightY;
     var defaultShadowDarkness = jsonData.environment.shadowDarkness;
+    var defaultShadowPlanes = jsonData.environment.shadowPlanes;
+    var defaultShadowPlaneX = [jsonData.environment.shadowPlaneX[0], jsonData.environment.shadowPlaneX[1]];
+    var defaultShadowPlaneY = [jsonData.environment.shadowPlaneY[0], jsonData.environment.shadowPlaneY[1]];
+    var defaultShadowPlaneZ = [jsonData.environment.shadowPlaneZ[0], jsonData.environment.shadowPlaneZ[1]];
     
-    // CONTROLS PANEL
+    // CONTROLS PANELS
     var environmentControls = document.getElementById("environmentControls");
     var objectControls = document.getElementById("objectControls");
     objectControls.setAttribute("style", "display: none");
@@ -53,55 +57,213 @@ fetch("../scenes/" + sceneName + ".json")
         camera.upperRadiusLimit = 200;
         camera.minZ = 0;
 
+        // FIELD OF VIEW
+        var fovSlider = document.getElementById("fovSlider");
+        fovSlider.value = defaultFov;
+        fovSlider.addEventListener("input", function(){
+            camera.fov = fovSlider.value;
+            setPrecision(fovSlider.value);
+        });
+        function setPrecision(fov){
+            if(fov > 0.6){
+                camera.wheelPrecision = 35;
+                camera.pinchPrecision = 175;
+            }else if(fov < 1.1){
+                camera.wheelPrecision = 5;
+                camera.pinchPrecision = 25;
+            }else{
+                camera.wheelPrecision = 20
+                camera.pinchPrecision = 100;
+            }
+        }
+
         // HIGHLIGHT LAYER
         var highlightLayer = new BABYLON.HighlightLayer("highlightLayer", scene);
         highlightLayer.outerGlow = false;
+
+        // SHADOW PLANES
+        var planeZ = BABYLON.MeshBuilder.CreateGround("planeZ", {height: 20, width: 20});
+        var planeY = BABYLON.MeshBuilder.CreateGround("planeY", {height: 20, width: 20});
+        planeY.rotation = new BABYLON.Vector3(Math.PI/2, 0, 0);
+        var planeX = BABYLON.MeshBuilder.CreateGround("planeX", {height: 20, width: 20});
+        planeX.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, 0);
+        var scenePlanes = [planeX, planeY, planeZ];
+        var invisMat = new BABYLON.ShadowOnlyMaterial("mat", scene);
+        invisMat.alpha = 0.4;
+        for(var i = 0; i < scenePlanes.length; i++){
+            scenePlanes[i].isPickable = false
+            scenePlanes[i].material = invisMat;
+            scenePlanes[i].material.backFaceCulling = false;
+            scenePlanes[i].receiveShadows = true;
+        };
+        var shadowPlanesPanel = document.getElementById("shadowPlanesPanel");
+        var shadowPlanesToggle = document.getElementById("shadowPlanesToggle");
+        var planeRadioX = document.getElementById("planeRadioX");
+        var planeRadioY = document.getElementById("planeRadioY");
+        var planeRadioZ = document.getElementById("planeRadioZ");
+        var shadowPlaneSlider = document.getElementById("shadowPlaneSlider");
+        var isSelectedX
+        var isSelectedY
+        var isSelectedZ
+        function shadowPlanesSetup(){
+            var event = new Event("change");
+            if(defaultShadowPlanes){
+                shadowPlanesToggle.checked = true;
+            }else{
+                shadowPlanesToggle.checked = false;
+            }
+            shadowPlanesToggle.dispatchEvent(event);
+            planeX.position.x = defaultShadowPlaneX[1];
+            planeY.position.z = defaultShadowPlaneY[1];
+            planeZ.position.y = defaultShadowPlaneZ[1];
+            if(defaultShadowPlaneX[0]){
+                planeRadioX.checked = true;
+                planeRadioX.dispatchEvent(event);
+            }
+            if(defaultShadowPlaneY[0]){
+                planeRadioY.checked = true;
+                planeRadioY.dispatchEvent(event);
+            }
+            if(defaultShadowPlaneZ[0]){
+                planeRadioZ.checked = true;
+                planeRadioZ.dispatchEvent(event);
+            }
+        }
+        shadowPlanesToggle.addEventListener("change", function(){
+            var event = new Event("change");
+            if(shadowPlanesToggle.checked){
+                planeRadioX.dispatchEvent(event);
+                planeRadioY.dispatchEvent(event);
+                planeRadioZ.dispatchEvent(event);
+                shadowPlanesPanel.setAttribute("style", "display: block");
+            }else{
+                planeX.isVisible = false;
+                planeY.isVisible = false;
+                planeZ.isVisible = false;
+                shadowPlanesPanel.setAttribute("style", "display: none");
+            }
+        });
+        planeRadioX.addEventListener("change", function(){
+            if(planeRadioX.checked){
+                shadowPlaneSlider.value = planeX.position.x;
+                planeX.isVisible = true;
+                planeY.isVisible = false;
+                planeZ.isVisible = false;
+                isSelectedX = true;
+                isSelectedY = false;
+                isSelectedZ = false;
+
+            }
+        });
+        planeRadioY.addEventListener("change", function(){
+            if(planeRadioY.checked){
+                shadowPlaneSlider.value = planeY.position.z;
+                planeX.isVisible = false;
+                planeY.isVisible = true;
+                planeZ.isVisible = false;
+                isSelectedX = false;
+                isSelectedY = true;
+                isSelectedZ = false;
+            }
+        });
+        planeRadioZ.addEventListener("change", function(){
+            if(planeRadioZ.checked){
+                shadowPlaneSlider.value = planeZ.position.y;
+                planeX.isVisible = false;
+                planeY.isVisible = false;
+                planeZ.isVisible = true;
+                isSelectedX = false;
+                isSelectedY = false;
+                isSelectedZ = true;
+            }
+        });
+        shadowPlaneSlider.addEventListener("input", function(){
+            if(isSelectedX){
+                planeX.position.x = shadowPlaneSlider.value;
+            }
+            if(isSelectedY){
+                planeY.position.z = shadowPlaneSlider.value;
+            }
+            if(isSelectedZ){
+                planeZ.position.y = shadowPlaneSlider.value;
+            }
+        });
+        shadowPlanesSetup()
+
+        // LIGHTS SETUP
+        var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(0, Math.PI, 0), scene);
+        light1.position = new BABYLON.Vector3(0, 0, 0);
+        light1.intensity = 3;
+        light1.autoCalcShadowZBounds = true;
+        var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 1, 0), scene);
+        light2.intensity = 1;
+        var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1, 0), scene);
+        light3.intensity = 1;
+
+        // LIGHT POSITION
+        var lightPivot = new BABYLON.TransformNode("root"); 
+        light1.parent = lightPivot;
+        var lightXSlider = document.getElementById("lightXSlider");
+        lightXSlider.value = defaultLightX;
+        lightPivot.rotation.x = Math.PI * lightXSlider.value;
+        lightXSlider.addEventListener("input", function(){
+            lightPivot.rotation.x = Math.PI * lightXSlider.value;
+        });
+        var lightYSlider = document.getElementById("lightYSlider");
+        lightYSlider.value = defaultLightY;
+        lightPivot.rotation.y = Math.PI * lightYSlider.value;
+        lightYSlider.addEventListener("input", function(){
+            lightPivot.rotation.y = Math.PI * lightYSlider.value;
+        });
+
+        // SHADOW SETUP
+        var shadowGenerator = new BABYLON.ShadowGenerator(2048, light1);
+        shadowGenerator.forceBackFacesOnly = true;
+        shadowGenerator.transparencyShadow = true;
+        shadowGenerator.darkness = defaultShadowDarkness;
+        shadowGenerator.bias = 0.001
+
+        // SHADOW DARKNESS
+        var shadowDarknessSlider = document.getElementById("shadowDarknessSlider");
+        shadowDarknessSlider.value = defaultShadowDarkness;
+        shadowDarknessSlider.setAttribute("style", "direction: rtl");
+        shadowDarknessSlider.addEventListener("input", function(){
+            shadowGenerator.darkness = shadowDarknessSlider.value;
+        });
+
+        // BACKGROUND COLOR
+        scene.clearColor = new BABYLON.Color3.FromHexString(defaultBgColor);
+        var environmentColorPicker = new Huebee(document.getElementById("environmentColorPicker"), {
+            notation: 'hex',
+            saturations: 3,
+        });
+        environmentColorPicker.setColor(defaultBgColor)
+        environmentColorPicker.value = defaultBgColor;
+        environmentColorPicker.on('change', function(color) {
+            scene.clearColor = new BABYLON.Color3.FromHexString(color);
+            environmentColorPicker.value = color;
+        });
 
         // APPEND 3D MODEL & EXECUTE WHEN READY
         BABYLON.SceneLoader.Append("../scenes/", sceneName + ".gltf", scene, function () {
             scene.executeWhenReady(function () {
 
                 // OBJECTS SETUP
-                var visObjects = []
-                var invisObjects = []
+                var sceneObjects = []
                 for(var i = 0; i < jsonData.objects.length; i++){
-                    if (jsonData.objects[i].isShadowOnly == false) {
-                        visObjects.push(scene.getMeshByName(jsonData.objects[i].name))
-                    }else{
-                        invisObjects.push(scene.getMeshByName(jsonData.objects[i].name))
-                    }
+                    sceneObjects.push(scene.getMeshByName(jsonData.objects[i].name))                    
                 };
-                
-                // VISIBLE OBJECTS MATERIAL
-                for(var i = 0; i < visObjects.length; i++){
-                    visObjects[i].material = new BABYLON.PBRMaterial(visObjects[i], scene);
-                    visObjects[i].material.roughness = 1;
-                    visObjects[i].material.clearCoat.isEnabled = true;
-                    visObjects[i].material.clearCoat.roughness = 1;
-                    visObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
-                    visObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
-                    visObjects[i].material.alpha = jsonData.objects[i].alpha;
+                for(var i = 0; i < sceneObjects.length; i++){
+                    shadowGenerator.addShadowCaster(sceneObjects[i])
+                    sceneObjects[i].receiveShadows = true;
+                    sceneObjects[i].material = new BABYLON.PBRMaterial(sceneObjects[i], scene);
+                    sceneObjects[i].material.roughness = 1;
+                    sceneObjects[i].material.clearCoat.isEnabled = true;
+                    sceneObjects[i].material.clearCoat.roughness = 1;
+                    sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
+                    sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
+                    sceneObjects[i].material.alpha = jsonData.objects[i].alpha;
                 };
-
-                // INVISIBLE OBJECTS MATERIAL
-                var invisMat = new BABYLON.ShadowOnlyMaterial("mat", scene);
-                invisMat.alpha = 0.4;
-                for(var i = 0; i < invisObjects.length; i++){
-                    invisObjects[i].material = invisMat;
-                };
-
-                // BACKGROUND COLOR
-                scene.clearColor = new BABYLON.Color3.FromHexString(defaultBgColor);
-                var environmentColorPicker = new Huebee(document.getElementById("environmentColorPicker"), {
-                    notation: 'hex',
-                    saturations: 3,
-                });
-                environmentColorPicker.setColor(defaultBgColor)
-                environmentColorPicker.value = defaultBgColor;
-                environmentColorPicker.on('change', function(color) {
-                    scene.clearColor = new BABYLON.Color3.FromHexString(color);
-                    environmentColorPicker.value = color;
-                });
 
                 // MESH SELECTION & EDITING
                 var objectColorPicker = new Huebee(document.getElementById("objectColorPicker"), {
@@ -112,15 +274,12 @@ fetch("../scenes/" + sceneName + ".json")
                 var objectAlphaSlider = document.getElementById("objectAlphaSlider");
                 objectAlphaSlider.setAttribute("style", "direction: rtl");
                 var selectedMesh;
-                for(var i = 0; i < invisObjects.length; i++){
-                    invisObjects[i].isPickable = false
-                };
                 scene.onPointerDown = function castRay(){
                     var ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), camera);
                     var hit = scene.pickWithRay(ray);
                     removeHighlight();
                     removeHuebee()
-                    if (visObjects.includes(hit.pickedMesh)){               
+                    if(sceneObjects.includes(hit.pickedMesh)){               
                         highlightLayer.addMesh(hit.pickedMesh, BABYLON.Color3.FromHexString("#ffffff"));
                         selectedMesh = hit.pickedMesh;
                         objectColorPicker.setColor(selectedMesh.material.albedoColor.toHexString())
@@ -134,8 +293,8 @@ fetch("../scenes/" + sceneName + ".json")
                     };
                 };
                 function removeHighlight(){
-                    for(var i = 0; i < visObjects.length; i++){
-                        highlightLayer.removeMesh(visObjects[i]);
+                    for(var i = 0; i < sceneObjects.length; i++){
+                        highlightLayer.removeMesh(sceneObjects[i]);
                     };
                 };
                 objectColorPicker.on('change', function(color) {
@@ -156,74 +315,6 @@ fetch("../scenes/" + sceneName + ".json")
                     };
                 };
 
-                
-                // FIELD OF VIEW
-                var fovSlider = document.getElementById("fovSlider");
-                fovSlider.value = defaultFov;
-                fovSlider.addEventListener("input", function(){
-                    camera.fov = fovSlider.value;
-                    setPrecision(fovSlider.value);
-                });
-                function setPrecision(fov){
-                    if(fov > 0.6){
-                        camera.wheelPrecision = 35;
-                        camera.pinchPrecision = 175;
-                    }else if(fov < 1.1){
-                        camera.wheelPrecision = 5;
-                        camera.pinchPrecision = 25;
-                    }else{
-                        camera.wheelPrecision = 20
-                        camera.pinchPrecision = 100;
-                    }
-                }
-
-                // LIGHTS SETUP
-                var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(0, Math.PI, 0), scene);
-                light1.position = new BABYLON.Vector3(0, 0, 0);
-                light1.intensity = 3;
-                light1.autoCalcShadowZBounds = true;
-                var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 1, 0), scene);
-                light2.intensity = 1;
-                var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1, 0), scene);
-                light3.intensity = 1;
-
-                // LIGHT POSITION
-                var lightPivot = new BABYLON.TransformNode("root"); 
-                light1.parent = lightPivot;
-                var lightXSlider = document.getElementById("lightXSlider");
-                lightXSlider.value = defaultLightX;
-                lightPivot.rotation.x = Math.PI * lightXSlider.value;
-                lightXSlider.addEventListener("input", function(){
-                    lightPivot.rotation.x = Math.PI * lightXSlider.value;
-                });
-                var lightYSlider = document.getElementById("lightYSlider");
-                lightYSlider.value = defaultLightY;
-                lightPivot.rotation.y = Math.PI * lightYSlider.value;
-                lightYSlider.addEventListener("input", function(){
-                    lightPivot.rotation.y = Math.PI * lightYSlider.value;
-                });
-
-                // SHADOW SETUP
-                var shadowGenerator = new BABYLON.ShadowGenerator(2048, light1);
-                for(var i = 0; i < visObjects.length; i++){
-                    shadowGenerator.addShadowCaster(visObjects[i])
-                };
-                for(var i = 0; i < scene.meshes.length; i++){
-                    scene.meshes[i].receiveShadows = true;
-                };
-                shadowGenerator.forceBackFacesOnly = true;
-                shadowGenerator.transparencyShadow = true;
-                shadowGenerator.darkness = defaultShadowDarkness;
-                shadowGenerator.bias = 0.001
-
-                // SHADOW DARKNESS
-                var shadowDarknessSlider = document.getElementById("shadowDarknessSlider");
-                shadowDarknessSlider.value = defaultShadowDarkness;
-                shadowDarknessSlider.setAttribute("style", "direction: rtl");
-                shadowDarknessSlider.addEventListener("input", function(){
-                    shadowGenerator.darkness = shadowDarknessSlider.value;
-                });
-
                 // DEFAULT BUTTON
                 var resetButton = document.getElementById("resetButton");
                 resetButton.addEventListener("click", function(){
@@ -243,11 +334,12 @@ fetch("../scenes/" + sceneName + ".json")
                     lightPivot.rotation.y = Math.PI * lightYSlider.value;
                     shadowDarknessSlider.value = defaultShadowDarkness;
                     shadowGenerator.darkness = defaultShadowDarkness;
+                    shadowPlanesSetup()
                     removeHighlight();
-                    for(var i = 0; i < visObjects.length; i++){
-                        visObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
-                        visObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
-                        visObjects[i].material.alpha = jsonData.objects[i].alpha;
+                    for(var i = 0; i < sceneObjects.length; i++){
+                        sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
+                        sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
+                        sceneObjects[i].material.alpha = jsonData.objects[i].alpha;
                     };
                     objectControls.setAttribute("style", "display: none");
                     environmentControls.setAttribute("style", "display: block");
@@ -257,11 +349,11 @@ fetch("../scenes/" + sceneName + ".json")
                 var canvasContainer = document.querySelector(".canvasContainer");
                 var downloadButton = document.getElementById("downloadButton");
                 var transparentBackground = document.getElementById("transparentBackground");
-                var sizeOne = document.getElementById("sizeOne");
-                var sizeTwo = document.getElementById("sizeTwo");
-                var sizeTree = document.getElementById("sizeTree");
+                var sizeOne = document.getElementById("sizeRadioOne");
+                var sizeTwo = document.getElementById("sizeRadioTwo");
+                var sizeTree = document.getElementById("sizeRadioTree");
                 downloadButton.addEventListener("click", function(){
-                    if (transparentBackground.checked){
+                    if(transparentBackground.checked){
                         scene.clearColor = new BABYLON.Color4(0,0,0,0);
                     }
                     canvasContainer.classList.add("resize");
