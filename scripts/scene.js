@@ -180,14 +180,26 @@ fetch("../scenes/" + sceneName + ".json")
         shadowPlaneSlider.addEventListener("input", function(){
             if(isSelectedX){
                 planeX.position.x = shadowPlaneSlider.value;
+                planeX.showBoundingBox = true;
             }
             if(isSelectedY){
                 planeY.position.z = shadowPlaneSlider.value;
+                planeY.showBoundingBox = true;
             }
             if(isSelectedZ){
                 planeZ.position.y = shadowPlaneSlider.value;
+                planeZ.showBoundingBox = true;
             }
         });
+
+        shadowPlaneSlider.addEventListener('focusout', hidePlaneBoundingBox);
+        shadowPlaneSlider.addEventListener('pointerup', hidePlaneBoundingBox);
+        function hidePlaneBoundingBox() {
+            planeX.showBoundingBox = false;
+            planeY.showBoundingBox = false;
+            planeZ.showBoundingBox = false;
+        }
+
         shadowPlanesSetup()
 
         // LIGHTS SETUP
@@ -265,6 +277,8 @@ fetch("../scenes/" + sceneName + ".json")
                     sceneObjects[i].material.alpha = jsonData.objects[i].alpha;
                 };
 
+                //console.log(scene.getBoundingBoxRenderer())
+
                 // MESH SELECTION & EDITING
                 var objectColorPicker = new Huebee(document.getElementById("objectColorPicker"), {
                     notation: 'hex',
@@ -281,6 +295,7 @@ fetch("../scenes/" + sceneName + ".json")
                     removeHuebee()
                     if(sceneObjects.includes(hit.pickedMesh)){               
                         highlightLayer.addMesh(hit.pickedMesh, BABYLON.Color3.FromHexString("#ffffff"));
+                        // hit.pickedMesh.showBoundingBox = true;
                         selectedMesh = hit.pickedMesh;
                         objectColorPicker.setColor(selectedMesh.material.albedoColor.toHexString())
                         objectEmissiveSlider.value = selectedMesh.material.emissiveIntensity;
@@ -295,6 +310,7 @@ fetch("../scenes/" + sceneName + ".json")
                 function removeHighlight(){
                     for(var i = 0; i < sceneObjects.length; i++){
                         highlightLayer.removeMesh(sceneObjects[i]);
+                        // sceneObjects[i].showBoundingBox = false;
                     };
                 };
                 objectColorPicker.on('change', function(color) {
