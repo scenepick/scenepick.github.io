@@ -80,10 +80,7 @@ fetch("../scenes/" + sceneName + ".json")
 
         // LIGHTS SETUP
         var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(0, Math.PI, 0), scene);
-        light1.position = new BABYLON.Vector3(10, 10, 10);
         light1.intensity = 3;
-        light1.autoCalcShadowZBounds = true;
-        
         var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 1, 0), scene);
         light2.intensity = 1;
         var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1, 0), scene);
@@ -108,13 +105,10 @@ fetch("../scenes/" + sceneName + ".json")
         // SHADOW SETUP
         var shadowGenerator = new BABYLON.ShadowGenerator(2048, light1);
         shadowGenerator.usePercentageCloserFiltering = true;
-        shadowGenerator.filteringQuality = BABYLON.ShadowGenerator.QUALITY_HIGH;
-        //shadowGenerator.blurBox = 10;
         shadowGenerator.forceBackFacesOnly = true;
         shadowGenerator.transparencyShadow = true;
         shadowGenerator.enableSoftTransparentShadow = true;
         shadowGenerator.darkness = defaultShadowDarkness;
-        //shadowGenerator.bias = 0.001;
 
         // SHADOW DARKNESS
         var shadowDarknessSlider = document.getElementById("shadowDarknessSlider");
@@ -282,7 +276,6 @@ fetch("../scenes/" + sceneName + ".json")
                 };
 
                 // MESH SELECTION & EDITING
-                //scene.getBoundingBoxRenderer( ).showBackLines = false;
                 var objectColorPicker = new Huebee(document.getElementById("objectColorPicker"), {
                     notation: 'hex',
                     saturations: 3,
