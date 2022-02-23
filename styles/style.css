@@ -330,7 +330,7 @@ section{
 /* -------------------- SCENES SPECIFIC */
 
 #scenesList{
-    padding: 40px 0px 120px 0px;
+    padding: 40px 0px 80px 0px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
@@ -340,23 +340,48 @@ section{
     width: 100%;
     display: block;
     border-radius: 4px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* -------------------- ABOUT SPECIFIC */
 
 .aboutGrid{
-    padding: 40px 0px 120px 0px;
+    padding: 40px 0px 80px 0px;
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-row-gap: 40px;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    list-style-type: none;
 }
-.aboutContainer{
+.aboutCard{
     width: 100%;
+    padding: 40px;
+    text-align: center;
+    color: #78909D;
+    background-color: #ffffff;
     display: block;
+    border-radius: 4px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
 }
-.aboutText{
-    margin: auto;
-    padding: 0px 40px 0px 0px;
+.aboutSubtitle{
+    text-align: center;
+    font-weight: 300;
+    padding: 0px 0px 20px 0px;
+}
+.stepsSection{
+    background-color: #F50057;
+    color: #ffffff;
+}
+.stepIcon{
+    width: 80px;
+    margin: 20px;
+}
+.ackSection{
+    background-color:#ECEFF1;
+    color: #78909D;
+}
+.ackLogo{
+    margin: 20px;
 }
 
 /* -------------------- CONTACT SPECIFIC */
@@ -485,13 +510,6 @@ section{
         line-height: 40px;
         font-size: 16px;
     }
-    .valueProposition, .contactTitle{
-        padding: 20px 0px 20px 0px;
-    }
-    .loopsGrid{
-        grid-template-columns: 1fr 1fr;
-        padding: 40px 0px 80px 0px;
-    }
     .canvasContainer{
         width: 100%;
         float: none;
@@ -507,14 +525,6 @@ section{
     }
     input[type="color"]:hover {
         opacity: 1;
-    }
-    .aboutGrid{
-        padding: 0px 0px 120px 0px;
-        grid-template-columns: 1fr;
-        grid-row-gap: 0px;
-    }
-    .aboutText{
-        padding: 40px 0px 20px 0px;
     }
     .modal{
         width: calc(100% - 160px);
@@ -568,11 +578,12 @@ section{
         padding: 20px 0px 20px 0px;
     }
     #scenesList{
-        padding: 40px 0px 60px 0px;
+        padding: 20px 0px 60px 0px;
         grid-template-columns: 1fr 1fr;
     }
     .aboutGrid{
-        padding: 0px 0px 60px 0px;
+        grid-template-columns: 1fr 1fr;
+        padding: 20px 0px 60px 0px;
     }
     .contactForm{
         padding: 20px 0px 60px 0px;
@@ -597,6 +608,9 @@ section{
 
 @media only screen and (max-width: 480px) {
     #scenesList{
+        grid-template-columns: 1fr;
+    }
+    .aboutGrid{
         grid-template-columns: 1fr;
     }
     .sendButton{
