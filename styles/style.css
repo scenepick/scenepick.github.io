@@ -9,26 +9,31 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 h1{
-    line-height: 80px;
-    font-size: 60px;
+    line-height: 72px;
+    font-size: 48px;
     font-weight: 800;
 }
 h2{
-    line-height: 40px;
-    font-size: 30px;
+    line-height: 48px;
+    font-size: 32px;
+}
+h3{
+    line-height: 36px;
+    font-size: 24px;
 }
 h4{
+    line-height: 30px;
     font-size: 20px;
     font-weight: 800;
 }
 h5{
-    line-height: 20px;
+    line-height: 24px;
     padding: 0px 0px 12px 0px;
     font-size: 16px;
     font-weight: 600;
 }
 p{
-    line-height: 30px;
+    line-height: 24px;
     font-size: 16px;
     font-weight: 300;
 }
@@ -376,12 +381,16 @@ section{
     width: 80px;
     margin: 20px;
 }
+.licSection{
+    padding: 0px 0px 40px 0px;
+    color: #37474F;
+}
 .ackSection{
     background-color:#ECEFF1;
     color: #78909D;
 }
 .ackLogo{
-    margin: 20px;
+    max-height: 40px;
 }
 
 /* -------------------- CONTACT SPECIFIC */
@@ -490,8 +499,12 @@ section{
 
 @media only screen and (max-width: 960px) {
     h1{
-        line-height: 40px;
-        font-size: 30px;
+        line-height: 48px;
+        font-size: 32px;
+    }
+    h4{
+        line-height: 30px;
+        font-size: 20px;
     }
     button:hover {
         opacity: 1;
@@ -541,6 +554,14 @@ section{
 /* -------------------- RESPONSIVE 720 */
 
 @media only screen and (max-width: 720px) {
+    h1{
+        line-height: 36px;
+        font-size: 24px;
+    }
+    h4{
+        line-height: 24px;
+        font-size: 16px;
+    }
     .wrapper{
         padding: 0px 40px 0px 40px;
     }
