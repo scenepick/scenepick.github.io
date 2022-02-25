@@ -57,6 +57,7 @@ fetch("../scenes/" + sceneName + ".json")
         camera.upperRadiusLimit = 200;
         camera.minZ = 0;
         camera.maxZ = 100;
+        camera.allowUpsideDown = true;
 
         // FIELD OF VIEW
         var fovSlider = document.getElementById("fovSlider");
@@ -271,8 +272,14 @@ fetch("../scenes/" + sceneName + ".json")
                     sceneObjects[i].material.clearCoat.roughness = 1;
                     sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
                     sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
+                    sceneObjects[i].material.emissiveColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color)
                     sceneObjects[i].visibility = jsonData.objects[i].visibility;
                     sceneObjects[i].material.wireframe = jsonData.objects[i].wireframe;
+                    if(jsonData.objects[i].wireframe){
+                        sceneObjects[i].material.clearCoat.isEnabled = false;
+                    }else{
+                        sceneObjects[i].material.clearCoat.isEnabled = true;
+                    }
                 };
 
                 // MESH SELECTION & EDITING
@@ -323,8 +330,11 @@ fetch("../scenes/" + sceneName + ".json")
                 objectWireframeToggle.addEventListener("change", function(){
                     if(objectWireframeToggle.checked){
                         selectedMesh.material.wireframe = true;
+                        selectedMesh.material.clearCoat.isEnabled = false;
+                        
                     }else{
                         selectedMesh.material.wireframe = false;
+                        selectedMesh.material.clearCoat.isEnabled = true;
                     }
                 });
                 function removeHuebee(){ // library bug fix - sometimes huebee did not dissappea
@@ -358,8 +368,14 @@ fetch("../scenes/" + sceneName + ".json")
                     for(var i = 0; i < sceneObjects.length; i++){
                         sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
                         sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
-                        sceneObjects[i].visibility = jsonData.objects[i].visibility;//
+                        sceneObjects[i].material.emissiveColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color)
+                        sceneObjects[i].visibility = jsonData.objects[i].visibility;
                         sceneObjects[i].material.wireframe = jsonData.objects[i].wireframe;
+                        if(jsonData.objects[i].wireframe){
+                            sceneObjects[i].material.clearCoat.isEnabled = false;
+                        }else{
+                            sceneObjects[i].material.clearCoat.isEnabled = true;
+                        }
                     };
                     objectControls.setAttribute("style", "display: none");
                     environmentControls.setAttribute("style", "display: block");
@@ -395,6 +411,13 @@ fetch("../scenes/" + sceneName + ".json")
                     canvasContainer.classList.remove("resize");
                     engine.resize();
                     scene.clearColor = new BABYLON.Color3.FromHexString(environmentColorPicker.value);
+                });
+                // LOG STUFF ON SPACE PRESS
+                document.addEventListener('keyup', event => {
+                    if (event.code === 'Space') {
+                      console.log(camera.position)
+                      console.log(camera.target)
+                    }
                 });
             });
         });
