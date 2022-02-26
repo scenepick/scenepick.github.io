@@ -270,17 +270,22 @@ fetch("../scenes/" + sceneName + ".json")
                     sceneObjects[i].material.roughness = 1;
                     sceneObjects[i].material.clearCoat.isEnabled = true;
                     sceneObjects[i].material.clearCoat.roughness = 1;
-                    sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
-                    sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
-                    sceneObjects[i].material.emissiveColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color)
-                    sceneObjects[i].visibility = jsonData.objects[i].visibility;
-                    sceneObjects[i].material.wireframe = jsonData.objects[i].wireframe;
-                    if(jsonData.objects[i].wireframe){
-                        sceneObjects[i].material.clearCoat.isEnabled = false;
-                    }else{
-                        sceneObjects[i].material.clearCoat.isEnabled = true;
-                    }
                 };
+                function objectPropertiesSetup(){
+                    for(var i = 0; i < sceneObjects.length; i++){
+                        sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
+                        sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
+                        sceneObjects[i].material.emissiveColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color)
+                        sceneObjects[i].visibility = jsonData.objects[i].visibility;
+                        sceneObjects[i].material.wireframe = jsonData.objects[i].wireframe;
+                        if(jsonData.objects[i].wireframe){
+                            sceneObjects[i].material.clearCoat.isEnabled = false;
+                        }else{
+                            sceneObjects[i].material.clearCoat.isEnabled = true;
+                        };
+                    };
+                };
+                objectPropertiesSetup()
 
                 // MESH SELECTION & EDITING
                 var objectColorPicker = new Huebee(document.getElementById("objectColorPicker"), {
@@ -363,20 +368,9 @@ fetch("../scenes/" + sceneName + ".json")
                     lightPivot.rotation.y = Math.PI * lightYSlider.value;
                     shadowDarknessSlider.value = defaultShadowDarkness;
                     shadowGenerator.darkness = defaultShadowDarkness;
-                    shadowPlanesSetup()
+                    shadowPlanesSetup();
                     removeHighlight();
-                    for(var i = 0; i < sceneObjects.length; i++){
-                        sceneObjects[i].material.albedoColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color);
-                        sceneObjects[i].material.emissiveIntensity = jsonData.objects[i].emissiveIntensity;
-                        sceneObjects[i].material.emissiveColor = new BABYLON.Color3.FromHexString(jsonData.objects[i].color)
-                        sceneObjects[i].visibility = jsonData.objects[i].visibility;
-                        sceneObjects[i].material.wireframe = jsonData.objects[i].wireframe;
-                        if(jsonData.objects[i].wireframe){
-                            sceneObjects[i].material.clearCoat.isEnabled = false;
-                        }else{
-                            sceneObjects[i].material.clearCoat.isEnabled = true;
-                        }
-                    };
+                    objectPropertiesSetup();
                     objectControls.setAttribute("style", "display: none");
                     environmentControls.setAttribute("style", "display: block");
                 };

@@ -1,12 +1,12 @@
 {
     "environment":{
-        "cameraPosition": [0, -1.1, 5],
-        "cameraTarget": [0, -0.6, 0],
+        "cameraPosition": [-2.7, 1.7, 2.9],
+        "cameraTarget": [0, -0.45, 0],
         "color": "#FF8000",
         "fov": 0.8,
-        "lightX": 1,
+        "lightX": 0.8,
         "lightY": 1,
-        "shadowDarkness": 0.75,
+        "shadowDarkness": 0.5,
         "shadowPlanes": true,
         "shadowPlaneX": [false, 0],
         "shadowPlaneY": [false, 0],
@@ -20,7 +20,7 @@
         "wireframe": false
     },{
         "name": "Object.002",
-        "color": "#FFFFFF",
+        "color": "#D5D5D5",
         "emissiveIntensity": 0.25,
         "visibility": 1,
         "wireframe": false
