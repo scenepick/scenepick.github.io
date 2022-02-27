@@ -27,9 +27,8 @@ fetch("../scenes/" + sceneName + ".json")
     var defaultCamTar = [jsonData.environment.cameraTarget[0],jsonData.environment.cameraTarget[1],jsonData.environment.cameraTarget[2]];
     var defaultBgColor = jsonData.environment.color;
     var defaultFov = jsonData.environment.fov;
-    var defaultLightX = jsonData.environment.lightX;
-    var defaultLightY = jsonData.environment.lightY;
-    var defaultShadowDarkness = jsonData.environment.shadowDarkness;
+    var defaultLightPosition = [jsonData.environment.lightPosition[0],jsonData.environment.lightPosition[1]];
+    var defaultShadowTransparency = jsonData.environment.shadowTransparency;
     var defaultShadowPlanes = jsonData.environment.shadowPlanes;
     var defaultShadowPlaneX = [jsonData.environment.shadowPlaneX[0], jsonData.environment.shadowPlaneX[1]];
     var defaultShadowPlaneY = [jsonData.environment.shadowPlaneY[0], jsonData.environment.shadowPlaneY[1]];
@@ -59,6 +58,58 @@ fetch("../scenes/" + sceneName + ".json")
         camera.maxZ = 100;
         camera.allowUpsideDown = true;
 
+        // BACKGROUND COLOR
+        scene.clearColor = new BABYLON.Color3.FromHexString(defaultBgColor);
+        var environmentColorPicker = new Huebee(document.getElementById("environmentColorPicker"), {
+            notation: 'hex',
+            saturations: 3,
+        });
+        environmentColorPicker.setColor(defaultBgColor)
+        environmentColorPicker.value = defaultBgColor;
+        environmentColorPicker.on('change', function(color) {
+            scene.clearColor = new BABYLON.Color3.FromHexString(color);
+            environmentColorPicker.value = color;
+        });
+
+        // LIGHTS SETUP
+        var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(0, Math.PI, 0), scene);
+        light1.intensity = 3;
+        var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 1, 0), scene);
+        light2.intensity = 1;
+        var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1, 0), scene);
+        light3.intensity = 1;
+
+        // LIGHT POSITION
+        var lightPivot = new BABYLON.TransformNode("root"); 
+        light1.parent = lightPivot;
+        var lightPosOneSlider = document.getElementById("lightPosOneSlider");
+        lightPosOneSlider.value = defaultLightPosition[0];
+        lightPivot.rotation.x = Math.PI * lightPosOneSlider.value;
+        lightPosOneSlider.addEventListener("input", function(){
+            lightPivot.rotation.x = Math.PI * lightPosOneSlider.value;
+        });
+        var lightPosTwoSlider = document.getElementById("lightPosTwoSlider");
+        lightPosTwoSlider.value = defaultLightPosition[1];
+        lightPivot.rotation.y = Math.PI * lightPosTwoSlider.value;
+        lightPosTwoSlider.addEventListener("input", function(){
+            lightPivot.rotation.y = Math.PI * lightPosTwoSlider.value;
+        });
+
+        // SHADOW SETUP
+        var shadowGenerator = new BABYLON.ShadowGenerator(2048, light1);
+        shadowGenerator.usePercentageCloserFiltering = true;
+        shadowGenerator.forceBackFacesOnly = true;
+        shadowGenerator.transparencyShadow = true;
+        shadowGenerator.enableSoftTransparentShadow = true;
+        shadowGenerator.darkness = defaultShadowTransparency;
+
+        // SHADOW TRANSPARENCY
+        var shadowTransparencySlider = document.getElementById("shadowTransparencySlider");
+        shadowTransparencySlider.value = defaultShadowTransparency;
+        shadowTransparencySlider.addEventListener("input", function(){
+            shadowGenerator.darkness = shadowTransparencySlider.value;
+        });
+
         // FIELD OF VIEW
         var fovSlider = document.getElementById("fovSlider");
         fovSlider.value = defaultFov;
@@ -78,46 +129,6 @@ fetch("../scenes/" + sceneName + ".json")
                 camera.pinchPrecision = 100;
             }
         }
-
-        // LIGHTS SETUP
-        var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(0, Math.PI, 0), scene);
-        light1.intensity = 3;
-        var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 1, 0), scene);
-        light2.intensity = 1;
-        var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1, 0), scene);
-        light3.intensity = 1;
-
-        // LIGHT POSITION
-        var lightPivot = new BABYLON.TransformNode("root"); 
-        light1.parent = lightPivot;
-        var lightXSlider = document.getElementById("lightXSlider");
-        lightXSlider.value = defaultLightX;
-        lightPivot.rotation.x = Math.PI * lightXSlider.value;
-        lightXSlider.addEventListener("input", function(){
-            lightPivot.rotation.x = Math.PI * lightXSlider.value;
-        });
-        var lightYSlider = document.getElementById("lightYSlider");
-        lightYSlider.value = defaultLightY;
-        lightPivot.rotation.y = Math.PI * lightYSlider.value;
-        lightYSlider.addEventListener("input", function(){
-            lightPivot.rotation.y = Math.PI * lightYSlider.value;
-        });
-
-        // SHADOW SETUP
-        var shadowGenerator = new BABYLON.ShadowGenerator(2048, light1);
-        shadowGenerator.usePercentageCloserFiltering = true;
-        shadowGenerator.forceBackFacesOnly = true;
-        shadowGenerator.transparencyShadow = true;
-        shadowGenerator.enableSoftTransparentShadow = true;
-        shadowGenerator.darkness = defaultShadowDarkness;
-
-        // SHADOW DARKNESS
-        var shadowDarknessSlider = document.getElementById("shadowDarknessSlider");
-        shadowDarknessSlider.value = defaultShadowDarkness;
-        shadowDarknessSlider.setAttribute("style", "direction: rtl");
-        shadowDarknessSlider.addEventListener("input", function(){
-            shadowGenerator.darkness = shadowDarknessSlider.value;
-        });
 
         // SHADOW PLANES
         var planeZ = BABYLON.MeshBuilder.CreateGround("planeZ", {height: 20, width: 20});
@@ -190,7 +201,6 @@ fetch("../scenes/" + sceneName + ".json")
                 isSelectedX = true;
                 isSelectedY = false;
                 isSelectedZ = false;
-
             }
         });
         planeRadioY.addEventListener("change", function(){
@@ -238,21 +248,7 @@ fetch("../scenes/" + sceneName + ".json")
             planeY.showBoundingBox = false;
             planeZ.showBoundingBox = false;
         }
-
         shadowPlanesSetup()
-
-        // BACKGROUND COLOR
-        scene.clearColor = new BABYLON.Color3.FromHexString(defaultBgColor);
-        var environmentColorPicker = new Huebee(document.getElementById("environmentColorPicker"), {
-            notation: 'hex',
-            saturations: 3,
-        });
-        environmentColorPicker.setColor(defaultBgColor)
-        environmentColorPicker.value = defaultBgColor;
-        environmentColorPicker.on('change', function(color) {
-            scene.clearColor = new BABYLON.Color3.FromHexString(color);
-            environmentColorPicker.value = color;
-        });
 
         // APPEND 3D MODEL & EXECUTE WHEN READY
         BABYLON.SceneLoader.Append("../scenes/", sceneName + ".gltf", scene, function () {
@@ -362,12 +358,12 @@ fetch("../scenes/" + sceneName + ".json")
                     fovSlider.value = defaultFov;
                     camera.fov = defaultFov;
                     setPrecision(defaultFov);
-                    lightXSlider.value = defaultLightX;
-                    lightPivot.rotation.x = Math.PI * lightXSlider.value;    
-                    lightYSlider.value = defaultLightY;
-                    lightPivot.rotation.y = Math.PI * lightYSlider.value;
-                    shadowDarknessSlider.value = defaultShadowDarkness;
-                    shadowGenerator.darkness = defaultShadowDarkness;
+                    lightPosOneSlider.value = defaultLightPosition[0];
+                    lightPivot.rotation.x = Math.PI * lightPosOneSlider.value;
+                    lightPosTwoSlider.value = defaultLightPosition[1];
+                    lightPivot.rotation.y = Math.PI * lightPosTwoSlider.value;
+                    shadowTransparencySlider.value = defaultShadowTransparency;
+                    shadowGenerator.darkness = defaultShadowTransparency;
                     shadowPlanesSetup();
                     removeHighlight();
                     objectPropertiesSetup();
@@ -406,11 +402,27 @@ fetch("../scenes/" + sceneName + ".json")
                     engine.resize();
                     scene.clearColor = new BABYLON.Color3.FromHexString(environmentColorPicker.value);
                 });
-                // LOG STUFF ON SPACE PRESS
+                // LOG SCENE VALUES SPACE PRESS
                 document.addEventListener('keyup', event => {
-                    if (event.code === 'Space') {
-                      console.log(camera.position)
-                      console.log(camera.target)
+                    if (event.code === 'Space') { 
+                        console.log(camera.position.x + ", " + camera.position.y + ", " + camera.position.z)
+                        console.log(camera.target.x + ", " + camera.target.y + ", " + camera.target.z)
+                        console.log(scene.clearColor.toHexString())
+                        console.log(lightPosOneSlider.value + ", " + lightPosTwoSlider.value)
+                        console.log(shadowTransparencySlider.value)
+                        console.log(fovSlider.value)
+                        console.log(shadowPlanesToggle.checked)
+                        console.log(planeRadioX.checked)
+                        console.log(planeRadioY.checked)
+                        console.log(planeRadioZ.checked)
+                        console.log(shadowPlaneSlider.value)
+                        for(var i = 0; i < sceneObjects.length; i++){
+                            console.log(sceneObjects[i].id)
+                            console.log(sceneObjects[i].material.albedoColor.toHexString())
+                            console.log(sceneObjects[i].material.emissiveIntensity)
+                            console.log(sceneObjects[i].visibility)
+                            console.log(sceneObjects[i].material.wireframe)
+                        };
                     }
                 });
             });
