@@ -441,3 +441,19 @@ fetch("../scenes/" + sceneName + ".json")
         engine.resize();
     });
 }); 
+
+// ADVANCED CONTROLS PANEL
+var advancedControlsButton = document.getElementById("advancedControlsButton")
+var advancedConontolsPanel = document.getElementById("advancedConontolsPanel")
+advancedConontolsPanel.setAttribute("style", "display: none");
+var isHiddenAdvancedControls = true
+advancedControlsButton.addEventListener("click", function(){
+    advancedControlsButton.classList.toggle("collapse");
+    if(isHiddenAdvancedControls){
+        advancedConontolsPanel.setAttribute("style", "display: block");
+        isHiddenAdvancedControls = false
+    }else{
+        advancedConontolsPanel.setAttribute("style", "display: none");
+        isHiddenAdvancedControls = true
+    }
+});

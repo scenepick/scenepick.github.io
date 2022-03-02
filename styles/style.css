@@ -213,7 +213,7 @@ fieldset{
     max-width: 240px;
     height: 8px;
     margin: 0px 0px 12px 0px;
-    border-radius: 4px;  
+    border-radius: 4px;
     background: #ECEFF1;
     outline: none;
     cursor: pointer;
@@ -227,7 +227,7 @@ fieldset{
     appearance: none;
     width: 20px;
     height: 20px;
-    border-radius: 50%; 
+    border-radius: 50%;
     background: #F50057;
 }
 .slider::-moz-range-thumb {
@@ -382,8 +382,11 @@ section{
     margin: 20px;
 }
 .licSection{
-    padding: 0px 0px 40px 0px;
     color: #37474F;
+}
+.licIcon{
+    width: 40px;
+    margin: 0px 0px 20px 0px;
 }
 .ackSection{
     background-color:#ECEFF1;
@@ -466,7 +469,7 @@ section{
 .controlsPanel{
     padding: 20px 39px 19px 39px;
 }
-.controlsContainer button{
+.sceneButtons button{
     width: 100%;
     margin: 20px 0px 0px 0px;
 }
@@ -481,6 +484,23 @@ section{
 .shadowPlaneRadio{
     float: left;
     margin: 10px 10px 20px 0px;
+}
+.collapsible {
+    background-color: #ffffff;
+    color: #F50057;
+    text-align: left;
+    margin: 0px 0px 20px 0px;
+    text-transform: none;
+    width: 100%;
+}
+.collapsible:after {
+    content: '\002B';
+    color: #F50057;
+    font-weight: bold;
+    float: right;
+}
+.collapse:after {
+    content: "\2212";
 }
 .transparentBgToggle{
     margin: 0px 0px 40px 0px;

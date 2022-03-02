@@ -57,38 +57,44 @@
                                 <input id="environmentColorPicker" class="color-input textBox"/>
                             </div>
                             <div class="control">
-                                <h5>Light position</h5>
+                                <h5>Vertical light orbit</h5>
                                 <input id="lightPosOneSlider" type="range" class="slider" min="0" max="2" step="0.01">
+                            </div>
+                            <div class="control">
+                                <h5>Horizontal light orbit</h5>
                                 <input id="lightPosTwoSlider" type="range" class="slider" min="0" max="2" step="0.01">
                             </div>
                             <div class="control">
                                 <h5>Shadow transparency</h5>
                                 <input id="shadowTransparencySlider" type="range" class="slider" min="0" max="1" step="0.01">
                             </div>
-                            <div class="control">
-                                <h5>Field of view</h5>
-                                <input id="fovSlider" type="range" class="slider" min="0.1" max="1.5" step="0.01">
-                            </div>
-                            <div class="control">
-                                <div class="controlToggle">
-                                    <input type="checkbox" id="shadowPlanesToggle" class="toggleButton">
-                                    <label for="shadowPlanesToggle"></label>
+                            <button id="advancedControlsButton" class="collapsible">Advanced Controls</button>
+                            <div id="advancedConontolsPanel">
+                                <div class="control">
+                                    <h5>Field of view</h5>
+                                    <input id="fovSlider" type="range" class="slider" min="0.1" max="1.5" step="0.01">
                                 </div>
-                                <h5>Shadow planes</h5>
-                                <div id="shadowPlanesPanel">
-                                    <div class="shadowPlaneRadio">
-                                        <input type="radio" id="planeRadioX" class="radioButton" name="shadowPlane" value="planeRadioX">
-                                        <label for="planeRadioX">x</label>
+                                <div class="control">
+                                    <div class="controlToggle">
+                                        <input type="checkbox" id="shadowPlanesToggle" class="toggleButton">
+                                        <label for="shadowPlanesToggle"></label>
                                     </div>
-                                    <div class="shadowPlaneRadio">
-                                        <input type="radio" id="planeRadioY" class="radioButton" name="shadowPlane" value="planeRadioY">
-                                        <label for="planeRadioY">y</label>
+                                    <h5>Shadow planes</h5>
+                                    <div id="shadowPlanesPanel">
+                                        <div class="shadowPlaneRadio">
+                                            <input type="radio" id="planeRadioX" class="radioButton" name="shadowPlane" value="planeRadioX">
+                                            <label for="planeRadioX">x</label>
+                                        </div>
+                                        <div class="shadowPlaneRadio">
+                                            <input type="radio" id="planeRadioY" class="radioButton" name="shadowPlane" value="planeRadioY">
+                                            <label for="planeRadioY">y</label>
+                                        </div>
+                                        <div class="shadowPlaneRadio">
+                                            <input type="radio" id="planeRadioZ" class="radioButton" name="shadowPlane" value="planeRadioZ">
+                                            <label for="planeRadioZ">z</label>
+                                        </div>
+                                        <input id="shadowPlaneSlider" type="range" class="slider" min="-4" max="4" step="0.01">
                                     </div>
-                                    <div class="shadowPlaneRadio">
-                                        <input type="radio" id="planeRadioZ" class="radioButton" name="shadowPlane" value="planeRadioZ">
-                                        <label for="planeRadioZ">z</label>
-                                    </div>
-                                    <input id="shadowPlaneSlider" type="range" class="slider" min="-4" max="4" step="0.01">
                                 </div>
                             </div>
                         </div>
