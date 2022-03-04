@@ -51,11 +51,12 @@ fetch("../scenes/" + sceneName + ".json")
         camera.attachControl(canvas, true);
         camera.wheelPrecision = 20;
         camera.pinchPrecision = 100;
-        camera.lowerBetaLimit = 0;
         camera.lowerRadiusLimit = 0;
         camera.upperRadiusLimit = 200;
         camera.minZ = 0;
         camera.maxZ = 100;
+        camera.lowerBetaLimit = null;
+        camera.upperBetaLimit = null;
         camera.allowUpsideDown = true;
 
         // BACKGROUND COLOR
@@ -402,6 +403,7 @@ fetch("../scenes/" + sceneName + ".json")
                     engine.resize();
                     scene.clearColor = new BABYLON.Color3.FromHexString(environmentColorPicker.value);
                 });
+                
                 // LOG SCENE VALUES SPACE PRESS
                 document.addEventListener('keyup', event => {
                     if (event.code === 'Space') { 

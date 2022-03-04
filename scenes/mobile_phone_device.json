@@ -1,0 +1,39 @@
+{
+    "environment":{
+        "cameraPosition": [-1.28, 0.7, -3.21],
+        "cameraTarget": [0.14, -1.87, -0.47],
+        "color": "#0055AA", 
+        "lightPosition": [1, 1],
+        "shadowTransparency": 0.5,
+        "fov": 0.8,
+        "shadowPlanes": true,
+        "shadowPlaneX": [false, 0],
+        "shadowPlaneY": [false, 0],
+        "shadowPlaneZ": [true, -2]
+    },
+    "objects": [{
+        "name": "Object.001",
+        "color": "#FFFFFF",
+        "emissiveIntensity": 0,
+        "visibility": 1,
+        "wireframe": false
+    },{
+        "name": "Object.002",
+        "color": "#000000",
+        "emissiveIntensity": 0,
+        "visibility": 1,
+        "wireframe": false
+    },{
+        "name": "Object.003",
+        "color": "#AAD5FF",
+        "emissiveIntensity": 0,
+        "visibility": 1,
+        "wireframe": false
+    },{
+        "name": "Object.004",
+        "color": "#0055AA",
+        "emissiveIntensity": 0,
+        "visibility": 1,
+        "wireframe": false
+    }]
+}

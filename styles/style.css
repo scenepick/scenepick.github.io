@@ -361,10 +361,8 @@ section{
 .aboutCard{
     width: 100%;
     padding: 40px;
-    text-align: center;
-    color: #78909D;
     background-color: #ffffff;
-    display: block;
+    color: #37474F;
     border-radius: 4px;
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
 }
@@ -377,12 +375,20 @@ section{
     background-color: #F50057;
     color: #ffffff;
 }
-.stepIcon{
+.stepsCard{
+    text-align: center;
+}
+.stepsIcon{
     width: 80px;
     margin: 20px;
 }
 .licSection{
     color: #37474F;
+}
+.licCard{
+    display: flex;
+    column-gap: 20px;
+    align-items: flex-start;
 }
 .licIcon{
     width: 40px;
@@ -391,6 +397,9 @@ section{
 .ackSection{
     background-color:#ECEFF1;
     color: #78909D;
+}
+.ackCard{
+    text-align: center;
 }
 .ackLogo{
     max-height: 40px;
