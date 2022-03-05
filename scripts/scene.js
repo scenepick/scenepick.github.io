@@ -257,8 +257,9 @@ fetch("../scenes/" + sceneName + ".json")
 
                 // OBJECTS SETUP
                 var sceneObjects = []
+                console.log(sceneObjects)
                 for(var i = 0; i < jsonData.objects.length; i++){
-                    sceneObjects.push(scene.getMeshByName(jsonData.objects[i].name))                    
+                    sceneObjects.push(scene.getMeshByName(jsonData.objects[i].name))             
                 };
                 for(var i = 0; i < sceneObjects.length; i++){
                     shadowGenerator.addShadowCaster(sceneObjects[i])
