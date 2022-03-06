@@ -1,14 +1,21 @@
-// READING LOCAL STORAGE
+// READING AND VALIDATING LOCAL STORAGE 
 const sceneName = localStorage.getItem("sceneName");
+if(sceneName == null){
+    window.location.href = "https://scenepick.com/pages/error.html";
+}
 
 // LOADING SCENE JSON
 fetch("../scenes/" + sceneName + ".json") 
 	.then(response => response.json()) 
 	.then(jsonData => {
 
+    // STARTING THE ENGINE AND CHECKING FOR WEBGL SUPPORT
     var canvas = document.getElementById("renderCanvas");
     var engine = new BABYLON.Engine(canvas, true,);
     engine.setHardwareScalingLevel(0.5);
+    if(engine.webGLVersion < 2){
+        window.location.href = "https://scenepick.com/pages/error.html"
+    }
 
     // KEEP CANVAS 1:1
     canvas.width = window.innerWidth;
@@ -257,7 +264,6 @@ fetch("../scenes/" + sceneName + ".json")
 
                 // OBJECTS SETUP
                 var sceneObjects = []
-                console.log(sceneObjects)
                 for(var i = 0; i < jsonData.objects.length; i++){
                     sceneObjects.push(scene.getMeshByName(jsonData.objects[i].name))             
                 };
