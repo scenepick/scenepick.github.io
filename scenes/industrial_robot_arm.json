@@ -9,7 +9,7 @@
         "shadowPlanes": true,
         "shadowPlaneX": [false, 0],
         "shadowPlaneY": [false, 0],
-        "shadowPlaneZ": [true, -2]
+        "shadowPlaneZ": [true, -2.005]
     },
     "objects": [{
         "name": "Object.001",

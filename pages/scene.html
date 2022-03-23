@@ -24,143 +24,158 @@
 </head>
 <body>
 <!-- Nav Bar -->
-    <nav>
-        <div class="wrapper">
-            <a href="scenes.html">
-                <img class="navLogo" src="../assets/logo.svg" alt="logo">
-            </a>
-            <img class="navMenuButton" src="../assets/menu.svg" alt="menu">
-            <ul class="navList">
-                <img class="navCloseButton" src="../assets/close.svg" alt="close">
-                <li><a href="scenes.html">scenes</a></li>
-                <li><a href="about.html">about</a></li>
-                <li><a href="contact.html">contact</a></li>
-            </ul>
-            <div id="navUnderlay" class="underlay"></div>
-        </div>
-    </nav>
+<nav>
+    <div class="wrapper">
+        <a href="scenes.html">
+            <img class="navLogo" src="../assets/logo.svg" alt="logo">
+        </a>
+        <img class="navMenuButton" src="../assets/menu.svg" alt="menu">
+        <ul class="navList">
+            <img class="navCloseButton" src="../assets/close.svg" alt="close">
+            <li><a href="scenes.html">scenes</a></li>
+            <li><a href="about.html">about</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+        <div id="navUnderlay" class="underlay"></div>
+    </div>
+</nav>
 <!-- Nav Bar -->
-    <section>
-        <div class="wrapper">
-            <div class="containers">
-                <div class="canvasContainer">
-                    <canvas id="renderCanvas" touch-action="none"></canvas>
-                </div>
-                <div class="controlsContainer">
-                    <div id="environmentControls" class="controls">
-                        <div class="controlsHeader">
-                            <h4>Global Settings</h4>
-                        </div>
-                        <div class="controlsPanel">
-                            <div class="control">
-                                <h5>Background color</h5>
-                                <input id="environmentColorPicker" class="color-input textBox"/>
-                            </div>
-                            <div class="control">
-                                <h5>Vertical light orbit</h5>
-                                <input id="lightPosOneSlider" type="range" class="slider" min="0" max="2" step="0.01">
-                            </div>
-                            <div class="control">
-                                <h5>Horizontal light orbit</h5>
-                                <input id="lightPosTwoSlider" type="range" class="slider" min="0" max="2" step="0.01">
-                            </div>
-                            <div class="control">
-                                <h5>Shadow transparency</h5>
-                                <input id="shadowTransparencySlider" type="range" class="slider" min="0" max="1" step="0.01">
-                            </div>
-                            <button id="advancedControlsButton" class="collapsible">Advanced Controls</button>
-                            <div id="advancedConontolsPanel">
-                                <div class="control">
-                                    <h5>Field of view</h5>
-                                    <input id="fovSlider" type="range" class="slider" min="0.1" max="1.5" step="0.01">
-                                </div>
-                                <div class="control">
-                                    <div class="controlToggle">
-                                        <input type="checkbox" id="shadowPlanesToggle" class="toggleButton">
-                                        <label for="shadowPlanesToggle"></label>
-                                    </div>
-                                    <h5>Shadow planes</h5>
-                                    <div id="shadowPlanesPanel">
-                                        <div class="shadowPlaneRadio">
-                                            <input type="radio" id="planeRadioX" class="radioButton" name="shadowPlane" value="planeRadioX">
-                                            <label for="planeRadioX">x</label>
-                                        </div>
-                                        <div class="shadowPlaneRadio">
-                                            <input type="radio" id="planeRadioY" class="radioButton" name="shadowPlane" value="planeRadioY">
-                                            <label for="planeRadioY">y</label>
-                                        </div>
-                                        <div class="shadowPlaneRadio">
-                                            <input type="radio" id="planeRadioZ" class="radioButton" name="shadowPlane" value="planeRadioZ">
-                                            <label for="planeRadioZ">z</label>
-                                        </div>
-                                        <input id="shadowPlaneSlider" type="range" class="slider" min="-4" max="4" step="0.01">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<section>
+    <div class="wrapper">
+        <div class="containers">
+            <div class="canvasContainer">
+                <canvas id="renderCanvas" touch-action="none"></canvas>
+            </div>
+            <div class="controlsContainer">
+                <div id="environmentControls" class="controls">
+                    <div class="controlsHeader">
+                        <h4>Environment</h4>
                     </div>
-                    <div id="objectControls" class="controls">
-                        <div class="controlsHeader">
-                            <h4>Object Settings</h4>
+                    <div class="controlsPanel">
+                        <div class="control">
+                            <h5>Background color</h5>
+                            <input id="environmentColorPicker" class="color-input textBox"/>
                         </div>
-                        <div class="controlsPanel">
+                        <div class="control">
+                            <h5>Vertical light orbit</h5>
+                            <input id="lightPosOneSlider" type="range" class="slider" min="0" max="2" step="0.01">
+                        </div>
+                        <div class="control">
+                            <h5>Horizontal light orbit</h5>
+                            <input id="lightPosTwoSlider" type="range" class="slider" min="0" max="2" step="0.01">
+                        </div>
+                        <div class="control">
+                            <h5>Shadow transparency</h5>
+                            <input id="shadowTransparencySlider" type="range" class="slider" min="0" max="1" step="0.01">
+                        </div>
+                        <button id="advancedControlsButton" class="collapsible">Advanced Controls</button>
+                        <div id="advancedConontolsPanel">
                             <div class="control">
-                                <h5>Color</h5>
-                                <input id="objectColorPicker" class="color-input textBox"/>
-                            </div>
-                            <div class="control">
-                                <h5>Self-illumination</h5>
-                                <input id="objectEmissiveSlider" type="range" class="slider" min="0" max="1" step="0.01">
-                            </div>
-                            <div class="control">
-                                <h5>Transparency</h5>
-                                <input id="objectVisibilitySlider" type="range" class="slider" min="0.25" max="1" step="0.01">
+                                <h5>Field of view</h5>
+                                <input id="fovSlider" type="range" class="slider" min="0.1" max="1.5" step="0.01">
                             </div>
                             <div class="control">
                                 <div class="controlToggle">
-                                    <input type="checkbox" id="objectWireframeToggle" class="toggleButton">
-                                    <label for="objectWireframeToggle"></label>
+                                    <input type="checkbox" id="shadowPlanesToggle" class="toggleButton">
+                                    <label for="shadowPlanesToggle"></label>
                                 </div>
-                                <h5>Wireframe</h5>
+                                <h5>Shadow planes</h5>
+                                <div id="shadowPlanesPanel">
+                                    <div class="shadowPlaneRadio">
+                                        <input type="radio" id="planeRadioX" class="radioButton" name="shadowPlane" value="planeRadioX">
+                                        <label for="planeRadioX">x</label>
+                                    </div>
+                                    <div class="shadowPlaneRadio">
+                                        <input type="radio" id="planeRadioY" class="radioButton" name="shadowPlane" value="planeRadioY">
+                                        <label for="planeRadioY">y</label>
+                                    </div>
+                                    <div class="shadowPlaneRadio">
+                                        <input type="radio" id="planeRadioZ" class="radioButton" name="shadowPlane" value="planeRadioZ">
+                                        <label for="planeRadioZ">z</label>
+                                    </div>
+                                    <input id="shadowPlaneSlider" type="range" class="slider" min="-4" max="4" step="0.01">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="sceneButtons">
-                        <button id="exportButton" class="fill">capture image</button>
-                        <button id="resetButton" class="line">reset scene</button>
+                </div>
+                <div id="objectControls" class="controls">
+                    <div class="controlsHeader">
+                        <h4>Object</h4><button id="environmentButton" class="headerButton">Environment</button>
+                    </div>
+                    <div class="controlsPanel">
+                        <div class="control">
+                            <h5>Color</h5>
+                            <input id="objectColorPicker" class="color-input textBox"/>
+                        </div>
+                        <div class="control">
+                            <h5>Self-illumination</h5>
+                            <input id="objectEmissiveSlider" type="range" class="slider" min="0" max="1" step="0.01">
+                        </div>
+                        <div class="control">
+                            <h5>Transparency</h5>
+                            <input id="objectVisibilitySlider" type="range" class="slider" min="0.25" max="1" step="0.01">
+                        </div>
+                        <div class="control">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="objectWireframeToggle" class="toggleButton">
+                                <label for="objectWireframeToggle"></label>
+                            </div>
+                            <h5>Wireframe</h5>
+                        </div>
                     </div>
                 </div>
+                <div class="sceneButtons">
+                    <button id="exportButton" class="fill">capture image</button>
+                    <button id="resetButton" class="line">reset scene</button>
+                    <button id="helpButton" class="line">help</button>
+                </div>
             </div>
         </div>
-    <!-- Export Modal -->
-        <div id="exportModal" class="modal">
-            <div class="modalTop">
-                <h5 class="modalTitle">Capture Image</h5>
-                <img id="exportCloseButton" class="modalClose" src="../assets/close.svg" alt="close">
-            </div>
-            <div class="modalContent">
-                <div class="transparentBgToggle">
-                    <input type="checkbox" id="transparentBackground" class="toggleButton">
-                    <label for="transparentBackground">Transparent background</label>
-                </div>
-                <h5>Image size</h5><br>
-                <div class="imageSizeRadio">
-                    <input type="radio" id="sizeRadioOne" class="radioButton" name="imageSize" value="sizeRadioOne">
-                    <label for="sizeRadioOne">Small (1080 ✕ 1080 px)</label>
-                </div>
-                <div class="imageSizeRadio">
-                    <input type="radio" id="sizeRadioTwo" class="radioButton" name="imageSize" value="sizeRadioTwo" checked>
-                    <label for="sizeRadioTwo">Medium (2160 ✕ 2160 px)</label>
-                </div>
-                <div class="imageSizeRadio">
-                    <input type="radio" id="sizeRadioTree" class="radioButton" name="imageSize" value="sizeRadioTree">
-                    <label for="sizeRadioTree">Large (3240 ✕ 3240 px)</label>
-                </div>
-                <button id="downloadButton" class="fill">Download</button>
-            </div>
+    </div>
+</section>
+<!-- Export Modal -->
+<div id="exportModal" class="modal">
+    <div class="modalTop">
+        <h5 class="modalTitle">Capture Image</h5>
+        <img id="exportCloseButton" class="modalClose" src="../assets/close.svg" alt="close">
+    </div>
+    <div class="modalContent">
+        <div class="transparentBgToggle">
+            <input type="checkbox" id="transparentBackground" class="toggleButton">
+            <label for="transparentBackground">Transparent background</label>
         </div>
-        <div id="exportUnderlay" class="underlay"></div>
-    </section>
+        <h5>Image size</h5><br>
+        <div class="imageSizeRadio">
+            <input type="radio" id="sizeRadioOne" class="radioButton" name="imageSize" value="sizeRadioOne">
+            <label for="sizeRadioOne">Small (1080 ✕ 1080 px)</label>
+        </div>
+        <div class="imageSizeRadio">
+            <input type="radio" id="sizeRadioTwo" class="radioButton" name="imageSize" value="sizeRadioTwo" checked>
+            <label for="sizeRadioTwo">Medium (2160 ✕ 2160 px)</label>
+        </div>
+        <div class="imageSizeRadio">
+            <input type="radio" id="sizeRadioTree" class="radioButton" name="imageSize" value="sizeRadioTree">
+            <label for="sizeRadioTree">Large (3240 ✕ 3240 px)</label>
+        </div>
+        <button id="downloadButton" class="fill">Download</button>
+    </div>
+</div>
+<div id="exportUnderlay" class="underlay"></div>
+<!-- Help Modal -->
+<div id="helpModal" class="modal">
+    <div class="modalTop">
+        <h5 class="modalTitle">Help</h5>
+        <img id="helpCloseButton" class="modalClose" src="../assets/close.svg" alt="close">
+    </div>
+    <div class="modalContent">
+        <div class="videoWrapper">
+            <iframe id="helpVideo" src="https://www.youtube.com/embed/DfmIipFddC8?enablejsapi=1&html5=1" allowfullscreen></iframe>
+        </div>
+        <button id="hideHelpButton" class="fill">Don't show again</button>
+    </div>
+</div>
+<div id="helpUnderlay" class="underlay"></div>
 <!-- Footer -->
 <footer>
     <div class="wrapper">
@@ -171,6 +186,6 @@
 <!-- Scripts -->
 <script src="../scripts/navigation.js"></script>
 <script src="../scripts/scene.js"></script>
-<script src="../scripts/export_modal.js"></script>
+<script src="../scripts/modals.js"></script>
 </body>
 </html>

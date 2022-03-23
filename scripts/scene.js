@@ -304,7 +304,7 @@ fetch("../scenes/" + sceneName + ".json")
                 scene.onPointerDown = function castRay(){
                     var ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), camera);
                     var hit = scene.pickWithRay(ray);
-                    removeHighlight();
+                    deselectObject()
                     removeHuebee()
                     if(sceneObjects.includes(hit.pickedMesh)){               
                         hit.pickedMesh.showBoundingBox = true;
@@ -316,15 +316,17 @@ fetch("../scenes/" + sceneName + ".json")
                         objectControls.setAttribute("style", "display: block");
                         environmentControls.setAttribute("style", "display: none");
                     }else{
-                        objectControls.setAttribute("style", "display: none");
-                        environmentControls.setAttribute("style", "display: block");
+                        deselectObject()
                     };
                 };
-                function removeHighlight(){
+
+                function deselectObject(){
+                    objectControls.setAttribute("style", "display: none");
+                    environmentControls.setAttribute("style", "display: block");
                     for(var i = 0; i < sceneObjects.length; i++){
                         sceneObjects[i].showBoundingBox = false;
                     };
-                };
+                }
                 objectColorPicker.on('change', function(color) {
                     selectedMesh.material.albedoColor = new BABYLON.Color3.FromHexString(color);
                     selectedMesh.material.emissiveColor = new BABYLON.Color3.FromHexString(color);
@@ -353,6 +355,11 @@ fetch("../scenes/" + sceneName + ".json")
                     };
                 };
 
+                // ENVIRONMENT BUTTON
+                var environmentButton = document.getElementById("environmentButton");
+                environmentButton.addEventListener("click", function(){
+                    deselectObject()
+                });
                 // DEFAULT BUTTON
                 var resetButton = document.getElementById("resetButton");
                 resetButton.addEventListener("click", function(){
@@ -373,10 +380,8 @@ fetch("../scenes/" + sceneName + ".json")
                     shadowTransparencySlider.value = defaultShadowTransparency;
                     shadowGenerator.darkness = defaultShadowTransparency;
                     shadowPlanesSetup();
-                    removeHighlight();
                     objectPropertiesSetup();
-                    objectControls.setAttribute("style", "display: none");
-                    environmentControls.setAttribute("style", "display: block");
+                    deselectObject()
                 };
 
                 // DOWNLOAD IMAGE
@@ -387,9 +392,7 @@ fetch("../scenes/" + sceneName + ".json")
                 var sizeTwo = document.getElementById("sizeRadioTwo");
                 var sizeTree = document.getElementById("sizeRadioTree");
                 downloadButton.addEventListener("click", function(){
-                    removeHighlight();
-                    objectControls.setAttribute("style", "display: none");
-                    environmentControls.setAttribute("style", "display: block");
+                    deselectObject()
                     if(transparentBackground.checked){
                         scene.clearColor = new BABYLON.Color4(0,0,0,0);
                     }
@@ -412,8 +415,8 @@ fetch("../scenes/" + sceneName + ".json")
                 });
                 
                 // LOG SCENE VALUES SPACE PRESS
-                document.addEventListener('keyup', event => {
-                    if (event.code === 'Space') { 
+                document.addEventListener("keyup", event => {
+                    if (event.code === "Space") { 
                         console.log(camera.position.x + ", " + camera.position.y + ", " + camera.position.z)
                         console.log(camera.target.x + ", " + camera.target.y + ", " + camera.target.z)
                         console.log(scene.clearColor.toHexString())
