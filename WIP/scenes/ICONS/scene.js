@@ -538,6 +538,8 @@ fetch("../../scenes/" + collectionName + "/" + sceneName + "/settings.json")
                     const environmentFile = await fetch("../../scenes/" + collectionName + "/environment.env").then(res => res.arrayBuffer());
                     const modelFile = await fetch("../../scenes/" + collectionName + "/" + sceneName + "/model.glb").then(res => res.arrayBuffer());
                     const managerFile = await fetch("../../scenes/" + collectionName + "/_Download/manager.js").then(res => res.arrayBuffer());
+                    const babylonFile = await fetch("../../scenes/" + collectionName + "/_Download/babylon.js").then(res => res.arrayBuffer());
+                    const babylonLoaderFile = await fetch("../../scenes/" + collectionName + "/_Download/babylonjs.loaders.min.js").then(res => res.arrayBuffer());
                     var settingsFile = {
                         "material1Color": material1Color,
                         "material2Color": material2Color,
@@ -563,8 +565,9 @@ fetch("../../scenes/" + collectionName + "/" + sceneName + "/settings.json")
                     zip.folder("ScenePick/assets").file("environment.env", environmentFile, {binary:true});
                     zip.folder("ScenePick/assets").file("model.glb", modelFile, {binary:true});
                     zip.folder("ScenePick/assets").file("manager.js", managerFile , {binary:true});
+                    zip.folder("ScenePick/assets").file("babylon.js", babylonFile , {binary:true});
+                    zip.folder("ScenePick/assets").file("babylonjs.loaders.min.js", babylonLoaderFile , {binary:true});
                     zip.folder("ScenePick/assets").file("settings.json", JSON.stringify(settingsFile), {binary:true});
-
                     zip.generateAsync({ 
                         type: "base64"
                     }).then(function(content) {
