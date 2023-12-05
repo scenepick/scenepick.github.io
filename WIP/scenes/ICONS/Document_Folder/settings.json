@@ -1,0 +1,16 @@
+{
+    "material1Color": "#EEFF41",
+    "material2Color": "#F0F4C3",
+    "material3Color": "#9CCC65",
+    "material4Color": "#558B2F",
+    "materialRoughness": 0.15,
+    "backgroundColorEnabled": true,
+    "backgroundColor": "#004D40",
+    "defaultCameraYaw": 90,
+    "defaultCameraPitch": 90,
+    "interactiveCameraEnabled": true,
+    "cameraSnapBackEnabled": true,
+    "horizontalSpinEnabled": true,
+    "spinClockwiseEnabled": true,
+    "verticalOscillationEnabled": true
+}

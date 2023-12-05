@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScenePick | Scenes</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../assets/favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5P6S24PS9L"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5P6S24PS9L');
+    </script>
+</head>
+<body>
+<!-- Nav Bar -->
+    <nav>
+        <div class="wrapper">
+            <a href="../index.html">
+                <div class="navLogo">
+                    <dotlottie-player src="../assets/logo.json" background="transparent" speed="2" loop autoplay></dotlottie-player>
+                    <img class="navLogo" src="../assets/logo_text.svg" alt="logo">
+                </div>
+            </a>
+            <img class="navMenuButton" src="../assets/menu.svg" alt="menu">
+            <ul class="navList">
+                <img class="navCloseButton" src="../assets/close.svg" alt="close">
+                <li><a href="../pages/scenes.html" class="active">scenes</a></li>
+                <li><a href="../pages/about.html">about</a></li>
+                <li><a href="../pages/contact.html">contact</a></li>
+            </ul>
+            <div id="navUnderlay" class="underlay"></div>
+        </div>
+    </nav>
+<!-- Scenes List -->
+    <section>
+        <div class="wrapper">
+            <ul id="scenesList">
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Star_Badge/thumbnail.png" data-scenename="Star_Badge"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Document_Folder/thumbnail.png" data-scenename="Document_Folder"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Earth_Planet/thumbnail.png" data-scenename="Earth_Planet"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Light_Bulb/thumbnail.png" data-scenename="Light_Bulb"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Heart_Love/thumbnail.png" data-scenename="Heart_Love"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/DNA_Gene/thumbnail.png" data-scenename="DNA_Gene"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Rocket_Space/thumbnail.png" data-scenename="Rocket_Space"></a></li>
+                <li><a href="../scenes/ICONS/scene.html"><img class="sceneThumbnail sceneImage" src="../scenes/ICONS/Bell_Notifications/thumbnail.png" data-scenename="Bell_Notifications"></a></li>
+
+                <li><img class="sceneThumbnail" src="../assets/check_back.svg"></li>
+            </ul>
+        </div>
+    </section>
+<!-- CTA -->
+    <a href="../pages/contact.html" class="ctaContainer">
+        <img src="../assets/scenes/chat.svg" alt="">
+        <p>Can't find what your are looking for? Get in touch and request a scene.</p>
+    </a>
+<!-- Footer -->
+    <footer>
+        <div class="wrapper">
+            <a href="https://www.instagram.com/scenepick.official" target="_blank"><img class="socialIcon" src="../assets/follow_us_on_instagram.svg"></a>
+            <p>Copyright © 2023 <span>scenepick.com</span></p>
+        </div>
+    </footer>
+<!-- Scripts -->
+    <script src="../scripts/navigation.js"></script>
+    <script src="../scripts/scenes.js"></script>
+</body>
+</html>

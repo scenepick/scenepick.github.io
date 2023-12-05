@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scenepick | scene</title>
+    <link rel="icon" type="image/png" href="../../assets/favicon.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="../../assets/favicon.png" sizes="32x32"/>
+    <link rel="stylesheet" href="../../libraries/huebee/huebee.css">
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="../../libraries/Huebee/hubee.js"></script>
+    <script src="../../libraries/JSZip/jszip.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5P6S24PS9L"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5P6S24PS9L');
+    </script>
+</head>
+<body>
+<!-- Nav Bar -->
+<nav>
+    <div class="wrapper">
+        <a href="../../index.html">
+            <div class="navLogo">
+                <dotlottie-player class="navLogo" src="../../assets/logo.json" background="transparent" speed="2" loop autoplay></dotlottie-player><img class="navLogo" src="../../assets/logo_text.svg" alt="logo">
+            </div>
+        </a>
+        <img class="navMenuButton" src="../../assets/menu.svg" alt="menu">
+        <ul class="navList">
+            <img class="navCloseButton" src="../../assets/close.svg" alt="close">
+            <li><a href="../../pages/scenes.html">scenes</a></li>
+            <li><a href="../../pages/about.html">about</a></li>
+            <li><a href="../../pages/contact.html">contact</a></li>
+        </ul>
+        <div id="navUnderlay" class="underlay"></div>
+    </div>
+</nav>
+<!-- Nav Bar -->
+<section id="sceneContent">
+    <div class="wrapper">
+        <div class="containers">
+            <div id="renderCanvasContainer">
+                <canvas id="renderCanvas" touch-action="none"></canvas>
+            </div>
+            <div class="controlsContainer">
+                <div class="sceneButtons">
+                    <button id="exportButton" onclick="checkForAnimation()" class="fill">export</button>
+                    <button id="helpButton" class="line">help</button>
+                </div>
+                <div class="controls">
+                    <div class="controlsHeader">
+                        <h4>Settings</h4>
+                        <button id="resetSettingsButton" class="simple">reset</button>
+                    </div>
+                    <div class="controlsPanel">
+                        
+                        <div class="control" id="material1ColorPickerContainer">
+                            <input id="material1ColorPicker" class="color-input textBox"/>
+                        </div>
+                        <div class="control" id="material2ColorPickerContainer">
+                            <input id="material2ColorPicker" class="color-input textBox"/>
+                        </div>
+                        <div class="control" id="material3ColorPickerContainer">
+                            <input id="material3ColorPicker" class="color-input textBox"/>
+                        </div>
+                        <div class="control" id="material4ColorPickerContainer">
+                            <input id="material4ColorPicker" class="color-input textBox"/>
+                        </div>
+                        <div class="control">
+                            <h5>Material roughness</h5>
+                            <input id="materialRoughnessSlider" type="range" class="slider" min="0" max="0.5" step="0.01">
+                        </div>
+                    </div>
+                    <div class="controlsPanel">
+                        <div class="control">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="backgroundColorEnabledToggle" class="toggleButton">
+                                <label for="backgroundColorEnabledToggle"></label>
+                            </div>
+                            <h5>Background color</h5>
+                        </div>
+                        <div class="control" id="backgroundColorPickerContainer">
+                            <input id="backgroundColorPicker" class="color-input textBox"/>
+                        </div>
+                    </div>
+                    <div class="controlsPanel">
+                        <div class="control">
+                            <h5>Default camera yaw</h5>
+                            <input id="defaultCameraYawSlider" type="range" class="slider" min="0" max="360" step="15">
+                        </div>
+                        <div class="control">
+                            <h5>Default camera pitch</h5>
+                            <input id="defaultCameraPitchSlider" type="range" class="slider" min="0" max="180" step="15">
+                        </div>
+                        <div class="control">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="interactiveCameraEnabledToggle" class="toggleButton">
+                                <label for="interactiveCameraEnabledToggle"></label>
+                            </div>
+                            <h5>Interactive camera</h5>
+                        </div>
+                        <div class="control" id="cameraSnapBackEnabledToggleContainer">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="cameraSnapBackEnabledToggle" class="toggleButton">
+                                <label for="cameraSnapBackEnabledToggle"></label>
+                            </div>
+                            <h5>Camera snap back</h5>
+                        </div>
+                    </div>
+                    <div class="controlsPanel">
+                        <div class="control">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="horizontalSpinEnabledToggle" class="toggleButton">
+                                <label for="horizontalSpinEnabledToggle"></label>
+                            </div>
+                            <h5>Horizontal spin</h5>
+                        </div>
+                        <div class="control" id="spinClockwiseEnabledToggleContainer">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="spinClockwiseEnabledToggle" class="toggleButton">
+                                <label for="spinClockwiseEnabledToggle"></label>
+                            </div>
+                            <h5>Spin clockwise</h5>
+                        </div>
+                    </div>
+                    <div class="controlsPanel">
+                        <div class="control">
+                            <div class="controlToggle">
+                                <input type="checkbox" id="verticalOscillationEnabledToggle" class="toggleButton">
+                                <label for="verticalOscillationEnabledToggle"></label>
+                            </div>
+                            <h5>Vertical oscillation</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Frame Generation -->
+<section id="generatingFrames">
+    <div class="wrapper">
+        <h1 class="sectionTitle" id="framesProgress">Generating frame:</h1>
+        <h4 class="sectionSubtitle">Please do not navigate away from this page.</h4>
+    </div>
+</section>
+<!-- Export Modal -->
+<div id="exportModal" class="modal">
+    <div class="modalTop">
+        <h5 class="modalTitle">Export</h5>
+        <img id="exportCloseButton" class="modalClose" src="../../assets/close.svg" alt="close">
+    </div>
+
+    <div class="modalTabs">
+        <button class="tabButton" onclick="openExportContent(event, 'imageExport')" id="exportDefault">Image</button>
+        <button class="tabButton" onclick="openExportContent(event, 'sceneExport')">Scene</button>
+        <button class="tabButton" onclick="openExportContent(event, 'framesExport')">Frames</button>
+    </div>
+
+    <div class="modalContent">
+        <div id="imageExport" class="tabContent">
+            <h5>Image size:</h5><br>
+            <div class="imageSizeRadio">
+                <input type="radio" id="sizeRadioSmall" class="radioButton" name="imageSize" value="sizeRadioSmall">
+                <label for="sizeRadioSmall">Small (1440 ✕ 1440 px)</label>
+            </div>
+            <div class="imageSizeRadio">
+                <input type="radio" id="sizeRadioMedium" class="radioButton" name="imageSize" value="sizeRadioMedium" checked>
+                <label for="sizeRadioMedium">Medium (2880 ✕ 2880 px)</label>
+            </div>
+            <div class="imageSizeRadio">
+                <input type="radio" id="sizeRadioLarge" class="radioButton" name="imageSize" value="sizeRadioLarge">
+                <label for="sizeRadioLarge">Large (4320 ✕ 4320 px)</label>
+            </div>
+            <button id="downloadImageButton" class="fill">download image</button>
+        </div>
+
+        <div id="framesExport" class="tabContent">
+            <div class="videoWrapper">
+                <iframe id="framesVideo"src="https://www.youtube.com/embed/DfmIipFddC8?enablejsapi=1&html5=1" allowfullscreen></iframe>
+            </div>
+            <button id="downloadFramesButton" class="fill">download frames</button>
+            <p id="downloadFramesError">ScenePick generates frames from active animations. Please enable <b>Horizontal spin</b> or <b>Vertical oscillation</b> to access this feature.</p>
+        </div>
+
+        <div id="sceneExport" class="tabContent">
+            <div class="videoWrapper">
+                <iframe id="sceneVideo" src="https://www.youtube.com/embed/DfmIipFddC8?enablejsapi=1&html5=1" allowfullscreen></iframe>
+            </div>
+            <button id="downloadSceneButton" class="fill">download scene</button>
+        </div>
+
+    </div>
+</div>
+<div id="exportUnderlay" class="underlay"></div>
+<!-- Help Modal -->
+<div id="helpModal" class="modal">
+    <div class="modalTop">
+        <h5 class="modalTitle">Help</h5>
+        <img id="helpCloseButton" class="modalClose" src="../../assets/close.svg" alt="close">
+    </div>
+    <div class="modalContent">
+        <div class="videoWrapper">
+            <iframe id="helpVideo" src="https://www.youtube.com/embed/DfmIipFddC8?enablejsapi=1&html5=1" allowfullscreen></iframe>
+        </div>
+        <button id="hideHelpButton" class="fill">Don't show again</button>
+    </div>
+</div>
+<div id="helpUnderlay" class="underlay"></div>
+<!-- Footer -->
+<footer>
+    <div class="wrapper">
+        <a href="https://www.instagram.com/scenepick.official" target="_blank"><img class="socialIcon" src="../../assets/follow_us_on_instagram.svg"></a>
+        <p>Copyright © 2023 <span>scenepick.com</span></p>
+    </div>
+</footer>
+<!-- Scripts -->
+<script src="../../scripts/navigation.js"></script>
+<script src="../../scripts/modals.js"></script>
+<script src="../../scenes/ICONS/scene.js"></script>
+</body>
+</html>
