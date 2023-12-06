@@ -304,6 +304,9 @@ nav{
 .navLogo:hover{
     opacity: 0.75;
 }
+.navLogoSymbol{
+    aspect-ratio: 1/1;
+}
 .navMenuButton{
     display: none;
     float: right;
