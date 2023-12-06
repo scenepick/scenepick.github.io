@@ -531,15 +531,15 @@ fetch("../../scenes/" + collectionName + "/" + sceneName + "/settings.json")
             var downloadSceneButton = document.getElementById("downloadSceneButton");
             downloadSceneButton.addEventListener("click", function() {
                 async function downloadScene() {
-                    const demoFile = await fetch("../../scenes/" + collectionName + "/_Download/DEMO.html").then(res => res.arrayBuffer());
-                    const readmeFile = await fetch("../../scenes/" + collectionName + "/_Download/README.txt").then(res => res.arrayBuffer());
-                    const sceneFile = await fetch("../../scenes/" + collectionName + "/_Download/scene.html").then(res => res.arrayBuffer());
+                    const demoFile = await fetch("../../scenes/" + collectionName + "/DOWNLOAD/DEMO.html").then(res => res.arrayBuffer());
+                    const readmeFile = await fetch("../../scenes/" + collectionName + "/DOWNLOAD/README.txt").then(res => res.arrayBuffer());
+                    const sceneFile = await fetch("../../scenes/" + collectionName + "/DOWNLOAD/scene.html").then(res => res.arrayBuffer());
                     const occlusionFile = await fetch("../../scenes/" + collectionName + "/" + sceneName + "/occlusion.png").then(res => res.arrayBuffer());
                     const environmentFile = await fetch("../../scenes/" + collectionName + "/environment.env").then(res => res.arrayBuffer());
                     const modelFile = await fetch("../../scenes/" + collectionName + "/" + sceneName + "/model.glb").then(res => res.arrayBuffer());
-                    const managerFile = await fetch("../../scenes/" + collectionName + "/_Download/manager.js").then(res => res.arrayBuffer());
-                    const babylonFile = await fetch("../../scenes/" + collectionName + "/_Download/babylon.js").then(res => res.arrayBuffer());
-                    const babylonLoaderFile = await fetch("../../scenes/" + collectionName + "/_Download/babylonjs.loaders.min.js").then(res => res.arrayBuffer());
+                    const managerFile = await fetch("../../scenes/" + collectionName + "/DOWNLOAD/manager.js").then(res => res.arrayBuffer());
+                    const babylonFile = await fetch("../../scenes/" + collectionName + "/DOWNLOAD/babylon.js").then(res => res.arrayBuffer());
+                    const babylonLoaderFile = await fetch("../../scenes/" + collectionName + "/DOWNLOAD/babylonjs.loaders.min.js").then(res => res.arrayBuffer());
                     var settingsFile = {
                         "material1Color": material1Color,
                         "material2Color": material2Color,
