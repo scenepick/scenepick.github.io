@@ -484,10 +484,11 @@ section{
     color: #37474F;
 }
 .projectCard{
-    margin: 40px 0px 80px 0px;
+    margin: 0px 0px 80px 0px;
 }
 .projectText{
     font-weight: 400;
+    color: #37474F;
 }
 
 .licenseCard{
