@@ -28,14 +28,13 @@ h4{
 }
 h5{
     line-height: 24px;
-    padding: 0px 0px 12px 0px;
     font-size: 16px;
     font-weight: 600;
 }
 p{
     line-height: 24px;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
 }
 a{
     text-decoration: none;
@@ -49,7 +48,7 @@ button {
     font-family : inherit;
     font-size: 16px;
     font-weight: 500;
-    color: white;
+    color: #ffffff;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -60,7 +59,7 @@ button.fill {
     line-height: 48px;
     padding: 0px 30px 0px 30px;
     background-color: #F50057;
-    color: white;
+    color: #ffffff;
 }
 button.line {
     line-height: 46px;
@@ -68,6 +67,12 @@ button.line {
     background-color :#ffffff;
     color: #F50057;
     border: 1px solid #F50057;
+}
+button.simple {
+    padding: 0px;
+    background-color :#ffffff;
+    color: #F50057;
+    border: none;
 }
 button:hover {
     opacity: 0.75;
@@ -93,10 +98,18 @@ fieldset{
     top: 0px;
     width: 100vw;
     height: 100vh;
-    background-color: #37474F;
-    opacity: 0.75;
+    background: rgba(0, 0, 0, 0.50);
     z-index: 1;
 }
+.backgroundColor{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ECEFF1;
+}
+
 .modalWrapper{
     position: fixed;
     top: 0;
@@ -159,6 +172,32 @@ fieldset{
     margin-top: 30px;
     clear: both;
 }
+.modalTabs{
+    display: flex;
+    width: 100%;
+    padding: 0px 40px 0px 40px;
+    margin: 0px 0px 20px 0px;
+}
+.tabButton{
+    border-radius: 0px;
+    line-height: 30px;
+    padding: 0px 19px 0px 19px;
+    background-color :#ffffff;
+    color: #F50057;
+    border: 1px solid #F50057;
+}
+.tabButton.active{
+    line-height: 32px;
+    padding: 0px 20px 0px 20px;
+    background-color: #F50057;
+    color: #ffffff;
+}
+.modalTabs :first-child{
+    border-radius: 4px 0px 0px 4px;
+}
+.modalTabs :last-child{
+    border-radius: 0px 4px 4px 0px;
+}
 .radioButton {
     display:none;
 }
@@ -215,7 +254,7 @@ fieldset{
     width: 100%;
     max-width: 240px;
     height: 8px;
-    margin: 0px 0px 12px 0px;
+    margin: 16px 0px 8px 0px;
     border-radius: 4px;
     background: #ECEFF1;
     outline: none;
@@ -244,9 +283,9 @@ fieldset{
     border: 0;
 }
 
-.pageTitle{
+.sectionTitle{
     text-align: center;
-    padding: 40px 0px 40px 0px;
+    padding: 40px 0px 20px 0px;
 }
 
 /* -------------------- NAV BAR */
@@ -257,11 +296,16 @@ nav{
     padding: 60px 0px 60px 0px;
 }
 .navLogo{
+    display: flex;
+    float: left;
     height: 60px;
     transition: opacity 150ms ease-in-out;
 }
 .navLogo:hover{
     opacity: 0.75;
+}
+.navLogoSymbol{
+    aspect-ratio: 1/1;
 }
 .navMenuButton{
     display: none;
@@ -299,10 +343,11 @@ nav{
     transition: opacity 150ms ease-in-out;
 }
 .navList li a.active{
-    color: #F50057;
+    color: #37474F;
     opacity: 1;
 }
 .navList li a:hover{
+    color: #F50057;
     opacity: 1;
 }
 
@@ -335,10 +380,44 @@ section{
     width: 100%;
 }
 
+/* -------------------- HOME SPECIFIC */
+
+.ctaButtonContainer{
+    padding: 20px 0px 40px 0px;
+    text-align: center;
+}
+
+#exportablesList{
+    padding: 20px 0px 80px 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    list-style-type: none;
+}
+
+.exportablesContainer{
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.exportablesThumbnail{
+    width: 100%;
+    display: block;
+    background-image: url("../assets/transparent_background.png");
+    aspect-ratio: 1/1;
+}
+
+.exportablesText{
+    padding: 20px;
+}
+
+
 /* -------------------- SCENES SPECIFIC */
 
 #scenesList{
-    padding: 40px 0px 80px 0px;
+    padding: 0px 0px 80px 0px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
@@ -354,7 +433,29 @@ section{
 .sceneImage:hover{
     opacity: 0.75;
 }
+.ctaContainer{
+    padding: 10px;
+    position: fixed;
+    right: 20px;
+    bottom:20px;
+    border-radius: 4px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    background-color: #F50057;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 
+}
+.ctaContainer img{
+    width: 32px;
+    margin-right: 10px;
+}
+.ctaContainer p{
+    color: white;
+    line-height: 16px;
+    font-size: 12px;
+}
 /* -------------------- ABOUT SPECIFIC */
 
 .aboutGrid{
@@ -373,33 +474,32 @@ section{
     border-radius: 4px;
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
 }
-.aboutSubtitle{
+.sectionSubtitle{
     text-align: center;
-    font-weight: 300;
+    font-weight: 400;
     padding: 0px 0px 20px 0px;
 }
-.stepsSection{
-    background-color: #F50057;
-    color: #ffffff;
-}
-.stepsCard{
-    text-align: center;
-}
-.stepsIcon{
-    width: 80px;
-    margin: 20px;
-}
-.licSection{
+.projectSection{
+    background-color: #ffffff;
     color: #37474F;
 }
-.licCard{
-    display: flex;
-    column-gap: 20px;
-    align-items: flex-start;
+.projectCard{
+    margin: 0px 0px 80px 0px;
 }
-.licIcon{
-    width: 40px;
-    margin: 0px 0px 20px 0px;
+.projectText{
+    font-weight: 400;
+    color: #37474F;
+}
+
+.licenseCard{
+    text-align: center;
+}
+.licenseIcon{
+    width: 60px;
+}
+.licenseSection{
+    background-color: #F50057;
+    color: #ffffff;
 }
 .ackSection{
     background-color:#ECEFF1;
@@ -410,14 +510,18 @@ section{
 }
 .ackLogo{
     max-height: 40px;
+    width: 100%;
 }
 
 /* -------------------- CONTACT SPECIFIC */
 
 .contactForm{
     max-width: 800px;
-    padding: 40px 0px 120px 0px;
+    padding: 40px 0px 80px 0px;
     margin: auto;
+}
+.contactInput{
+    margin: 8px 0px 0px 0px;
 }
 .nameInput, .emailInput{
     width: calc(50% - 20px);
@@ -432,14 +536,14 @@ section{
 .messageInput{
     margin: 0px 0px 30px 0px;
 }
-.consentToggle{
+.consentToggleContainer{
     margin: 0px 0px 40px 0px;
 }
-.sendButton{
+#submitButton{
     display: block;
     margin: auto;
 }
-.thankyou_message{
+#thanYouMessage{
     text-align: center;
     color: #78909D;
 }
@@ -450,23 +554,24 @@ section{
     float: left;
     padding: 0px 0px 80px 0px;
 }
-.canvasContainer{
+#renderCanvasContainer{
     float: left;
     max-width: 800px;
     max-height: 800px;
     width: calc(100% - 400px);
+    border-radius: 4px;
+    background-image: url("../assets/transparent_background.png");
 }
-.canvasContainer.resize{
-    max-width: 1082px;
-    max-height: 1082px;
-    width: 1082px;
-    height: 1082px;
+#renderCanvasContainer.resize{
+    max-width: 1080px;
+    max-height: 1080px;
+    width: 1080px;
+    height: 1080px;
     position: absolute;
 }
 #renderCanvas{
     display: block;
     border-radius: 4px;
-    border: 1px dashed #78909D;
     width: 100%;
     outline: none;
 }
@@ -478,9 +583,10 @@ section{
 .controls{
     border-radius: 4px;
     border: 1px solid #78909D;
+    padding-bottom: 9px;
 }
 .controlsHeader{
-    padding: 39px 39px 19px 39px;
+    padding: 29px 39px 0px 39px;
     display: flex;
     justify-content: space-between;
 }
@@ -496,18 +602,19 @@ section{
     float: right;
 }
 .controlsPanel{
-    padding: 20px 39px 19px 39px;
+    margin: 20px 39px 20px 39px;
+    padding-top: 20px;
+    border-top: 1px dashed #B1BEC5;
 }
 .sceneButtons button{
     width: 100%;
-    margin: 20px 0px 0px 0px;
+    margin: 0px 0px 20px 0px;
 }
 .control{
     margin: 0px 0px 20px 0px;
 }
 .controlToggle{
     float: right;
-    margin-top: -2px;
     margin-right: -10px;
 }
 .shadowPlaneRadio{
@@ -552,6 +659,9 @@ section{
     border: none;
     outline: none;
 }
+#generatingFrames{
+    min-height: 320px;
+}
 
 /* -------------------- RESPONSIVE 960 */
 
@@ -581,7 +691,7 @@ section{
         line-height: 40px;
         font-size: 16px;
     }
-    .canvasContainer{
+    #renderCanvasContainer{
         width: 100%;
         float: none;
     }
@@ -607,6 +717,14 @@ section{
     .modalContent{
         max-height: calc(100% - 170px);
     }
+    .ctaContainer{
+        position:static;
+        border-radius: 0px;
+        box-shadow: none;
+        width: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
   }
 
 /* -------------------- RESPONSIVE 720 */
@@ -615,6 +733,10 @@ section{
     h1{
         line-height: 36px;
         font-size: 24px;
+    }
+    h3{
+        line-height: 30px;
+        font-size: 20px;
     }
     h4{
         line-height: 24px;
@@ -657,12 +779,19 @@ section{
         padding: 20px 0px 20px 0px;
     }
     #scenesList{
-        padding: 20px 0px 60px 0px;
+        padding: 0px 0px 60px 0px;
+        grid-template-columns: 1fr 1fr;
+    }
+    #exportablesList{
+        padding: 0px 0px 60px 0px;
         grid-template-columns: 1fr 1fr;
     }
     .aboutGrid{
         grid-template-columns: 1fr 1fr;
         padding: 20px 0px 60px 0px;
+    }
+    .projectCard{
+        margin: 20px 0px 60px 0px;
     }
     .contactForm{
         padding: 20px 0px 60px 0px;
@@ -686,6 +815,9 @@ section{
 /* -------------------- RESPONSIVE 480 */
 
 @media only screen and (max-width: 480px) {
+    #exportablesList{
+        grid-template-columns: 1fr;
+    }
     #scenesList{
         grid-template-columns: 1fr;
     }

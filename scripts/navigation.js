@@ -25,4 +25,4 @@ function screenTest(e) {
     navList.setAttribute("style", "right: -200px");
 }
 
-mql.addListener(screenTest);
+//mql.addListener(screenTest);

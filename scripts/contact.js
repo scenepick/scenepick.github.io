@@ -1,9 +1,10 @@
-var sendButton = document.getElementById("sendButton");
-var consent = document.getElementById("consent");
-consent.addEventListener("click", function(){
-    if (consent.checked){
-        sendButton.disabled = false;
+var consentToggle = document.getElementById("consentToggle");
+var submitButton = document.getElementById("submitButton");
+
+consentToggle.addEventListener("click", function(){
+    if (consentToggle.checked){
+        submitButton.disabled = false;
     } else {
-        sendButton.disabled = true;
+        submitButton.disabled = true;
     }
 });
